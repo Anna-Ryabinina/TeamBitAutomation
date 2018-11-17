@@ -8,14 +8,14 @@ from src.test_data_generators.User import User
 from src.test_data_generators.RequestPayload import RequestPayload
 from src.api_helpers.ApiMethods import ApiMethods
 from src.api_helpers.Authorisation import Authorisation
-from src.pages.pages.LogInPage import LoginPage
-from src.pages.pages.RequestPage import RequestsPage
-from src.pages.popups.FeedbackRequestPopup import FeedbackRequestPopup
-from src.pages.pages.FeedbackPage import FeedbackPage
+from src.pageobjects.pages.LogInPage import LoginPage
+from src.pageobjects.pages.RequestPage import RequestsPage
+from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from tests.BaseTest import BaseTest
 
 
-class MyTestCase(BaseTest):
+class RequestTests(BaseTest):
 
     def test_user_can_send_request(self):
         request_text = self.execute_date + 'test_user_can_send_request'
@@ -36,7 +36,7 @@ class MyTestCase(BaseTest):
          .click_send_request_button())
 
         RequestsPage().open()
-        rq = RequestsPage().get_request_by_text(request_text)
+        rq = RequestsPage().open_sent().get_request_by_text(request_text)
         assert rq is not None
 
     def test_user_receive_request(self):

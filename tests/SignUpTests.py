@@ -4,8 +4,8 @@ from selene.api import *
 from src.pages_url import *
 
 from tests.BaseTest import BaseTest
-from src.pages.pages.SignUpPage import SignUpPage
-from src.pages.popups.OnboardingPopup import OnboardingPopup
+from src.pageobjects.pages.SignUpPage import SignUpPage
+from src.pageobjects.popups.OnboardingPopup import OnboardingPopup
 
 
 class SignUpTests(BaseTest):

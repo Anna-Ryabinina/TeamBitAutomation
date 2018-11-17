@@ -36,11 +36,11 @@ ONBOARDING_SURVEY_LIVE_BUTTON = './/*[@class="recurring-one-survey-question-setu
 ONBOARDING_SURVEY_TEXT = './/*[@class="recurring-one-survey-question-setup"]/b/span'
 
 # Sidebar common elements
-SIDEBAR_TEAMMATE = '//*[@class="left-panel-users-list-user"]'
+SIDEBAR_TEAMMATE = '.left-panel-users-list-user'
 SIDEBAR_TEAMMATE_NAME = ".//a"
-SIDEBAR_TEAMMATE_FEEDBACK_BUTTON = './/*[@class="icon new-small-icon"]'
-SIDEBAR_TEAMMATE_REQUEST_BUTTON = './/*[@class="icon ask-small-icon"]'
-SIDEBAR_INVITE_LINK = 'Invite your teammates'
+SIDEBAR_TEAMMATE_FEEDBACK_BUTTON = '.new-small-icon'
+SIDEBAR_TEAMMATE_REQUEST_BUTTON = '.ask-small-icon'
+SIDEBAR_INVITE_LINK = '.left-panel-users-list-invite'
 
         # FeedbackPage
 FEEDBACK_LOGO = '#app > div > header > div.logo'
@@ -145,6 +145,7 @@ MAIN_MENU_FEEDBACK = ''
 MAIN_MENU_REQUESTS = ''
 MAIN_MENU_SURVEYS = ''
 MAIN_MENU_REVIEWS = ''
+
 
 TEAMMATE_EDIT_BUTTON = '//*[@id="app"]/div/div[3]/div[2]/div/section[2]/div/div[6]/button'
 TEAMMATE_SEND_FEEDBACK_BUTTON = '//*[@id="app"]/div/div[3]/div[2]/div/section[2]/div/div[6]/button[1]'

@@ -8,9 +8,9 @@ from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.User import User
 from src.test_data_generators.Team import Team
 from src.test_data_generators.FeedbackPayload import FeedbackPayload
-from src.pages.pages.FeedbackPage import *
-from src.pages.pages.LogInPage import LoginPage
-from src.pages.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.pages.FeedbackPage import *
+from src.pageobjects.pages.LogInPage import LoginPage
+from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
 
 from tests.BaseTest import BaseTest
 
@@ -71,13 +71,13 @@ class FeedbackTests(BaseTest):
         fb.people.should(have.text('team'))
         fb.to_praise_link.should(have.text('Added to praise'))
 
-        fb = FeedbackPage().open_sent().get_feedback_by_text(feedback_text)
+        fb = FeedbackPage().open_added_to_praise().get_feedback_by_text(feedback_text)
         assert fb is not None
 
     def test_user_can_add_sent_feedback_to_praise(self):
         user1 = User(user_1)
         user2 = User(user_2)
-        payload = FeedbackPayload([user2]).generate_feedback_data()
+        payload = FeedbackPayload([user2], text_prefix=self.execute_date).generate_feedback_data()
         sess = requests.session()
 
         Authorisation(sess).login_with_email(user1)
@@ -103,7 +103,7 @@ class FeedbackTests(BaseTest):
     def test_user_can_add_recieved_feedback_to_praise(self):
         user1 = User(user_1)
         user2 = User(user_2)
-        payload = FeedbackPayload([user1], test_prefix=self.execute_date).generate_feedback_data()
+        payload = FeedbackPayload([user1], text_prefix=self.execute_date).generate_feedback_data()
         sess = requests.session()
 
         Authorisation(sess).login_with_email(user2)

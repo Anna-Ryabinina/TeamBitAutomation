@@ -1,16 +1,20 @@
 import datetime
 import unittest
-
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
-
-from src.pages.pages.FeedbackPage import FeedbackPage
-from src.pages.popups.FeedbackRequestPopup import FeedbackRequestPopup
-from src.pages.pages.LogInPage import LoginPage
+from src.pageobjects.pages.TeammatePage import TeammatePage
+from src.pageobjects.pages.FeedbackPage import FeedbackPage
+from src.pageobjects.pages.TeamsPage import TeamsPage
+from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.pages.LogInPage import LoginPage
 from src.test_data_generators.User import User
 from tests.BaseTest import BaseTest
 from selene.api import *
 from src.test_data import *
+from src.pageobjects.blocks.TeammatesSidebarBlock import TeammatesSidebarBlock
+from src.pageobjects.pages.RequestPage import RequestsPage
+from src.pageobjects.pages.PeoplePage import PeoplePage
+import time
 
 class FeedbackFormElementsTests(BaseTest):
 
@@ -23,6 +27,7 @@ class FeedbackFormElementsTests(BaseTest):
         browser.set_driver(cls.driver)
         user1 = User(user_1)
         LoginPage().open().login(user1.email, user1.password)
+        time.sleep(0.5)
 
     def setUp(self):
         assert True
@@ -81,32 +86,43 @@ class FeedbackFormElementsTests(BaseTest):
          .popup.should_not(be.visible))
 
 
-    def test_feedback_form_openes_from_sidebar(self):
-        assert True
+    def test_feedback_form_opens_from_sidebar(self):
+        TeammatesSidebarBlock().send_feedback_by_id()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_feedback_form_opens_from_teammate_page(self):
-        assert True
+        TeammatePage().open_by_user_id(User(user_2).id)
+        TeammatePage().click_send_feedback_button()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_feedback_form_opens_from_team_page(self):
-        assert True
+        TeamsPage().open().get_team_row_by_id().send_feedback_button.click()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_request_form_opens_from_request_page(self):
-        assert True
+        RequestsPage().open().request_feedback_button.click()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_request_form_opens_from_sidebar(self):
-        assert True
+        FeedbackPage().open_all()
+        TeammatesSidebarBlock().request_feedback_by_id()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_request_form_opens_from_teammate_page(self):
-        assert True
+        TeammatePage().open_by_user_id(User(user_2).id).click_request_feedback_button()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_request_form_openst_from_team_page(self):
-        assert True
+        TeamsPage().open().get_team_row_by_id().send_feedback_button.click()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_feedback_form_opens_from_people_page(self):
-        assert True
+        PeoplePage().open().get_teammate_row_by_id().send_feedback_button.click()
+        FeedbackRequestPopup().popup.should(be.visible)
 
     def test_request_form_opens_from_people_page(self):
-        assert True
+        PeoplePage().open().get_teammate_row_by_id().request_feedback_button.click()
+        FeedbackRequestPopup().popup.should(be.visible)
 
 if __name__ == '__main__':
     unittest.main()

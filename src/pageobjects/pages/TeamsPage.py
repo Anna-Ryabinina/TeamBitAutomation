@@ -12,7 +12,7 @@ class TeamsPage(object):
         browser.open_url(TEAMS_PAGE_URL)
         return TeamsPage()
 
-    def get_team_row_by_id(self, id):
+    def get_team_row_by_id(self, id=0):
         teams = ss(TEAM_ROW)
         if len(teams) == 0:
             return None
@@ -27,11 +27,11 @@ class TeamsPage(object):
                 return TeamRow(t)
         return None
 
-    def leave_team_by_id(self, id):
+    def leave_team_by_id(self, id=0):
         t = self.get_team_row_by_id(id)
         return t.leave_team()
 
-    def join_team_by_id(self, id):
+    def join_team_by_id(self, id=0):
         t = self.get_team_row_by_id(id)
         return t.join_team()
 

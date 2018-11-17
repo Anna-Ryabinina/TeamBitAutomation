@@ -16,7 +16,7 @@ class PeoplePage(object):
         self.invite_button.click()
         return PeoplePage()
 
-    def get_teammate_row_by_id(self, id):
+    def get_teammate_row_by_id(self, id=0):
         people = ss(PEOPLE_TEAMMATE_ROW)
         if len(people) == 0:
             return None
@@ -31,11 +31,11 @@ class PeoplePage(object):
                 return TeammateRow(man)
         return None
 
-    def make_admin_by_id(self, id):
+    def make_admin_by_id(self, id=0):
         teammate = self.get_teammate_row_by_id(id)
         return teammate.make_admin()
 
-    def make_user_by_id(self, id):
+    def make_user_by_id(self, id=0):
         teammate = self.get_teammate_row_by_id(id)
         return teammate.make_user()
 

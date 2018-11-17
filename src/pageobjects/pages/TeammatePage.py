@@ -1,6 +1,6 @@
 from selene.api import *
 
-from src.pages.pages.FeedbackPage import FeedbackBlock
+from src.pageobjects.pages.FeedbackPage import FeedbackBlock
 from src.pages_url import *
 from src.locators import *
 
@@ -32,7 +32,7 @@ class TeammatePage(object):
         self.request_feedback_button.click()
 
     def open_by_user_id(self, id):
-        browser.open_url(TEAMS_PAGE_URL + str(id))
+        browser.open_url(TEAMMATE_PAGE_URL + str(id))
         return TeammatePage()
 
 

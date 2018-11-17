@@ -6,8 +6,8 @@ from selene.api import *
 from webdriver_manager.chrome import ChromeDriverManager
 
 from tests.BaseTest import BaseTest
-from src.pages.pages.LogInPage import LoginPage
-from src.pages.pages.FeedbackPage import FeedbackPage
+from src.pageobjects.pages.LogInPage import LoginPage
+from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from src.api_helpers.Authorisation import Authorisation
 from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.FeedbackPayload import FeedbackPayload
@@ -38,7 +38,7 @@ class FeedbackPermissionToRead(BaseTest):
 
         sess = requests.session()
         auth = Authorisation(sess).login_with_email(cls.user2)
-        fb = ApiMethods(auth.get_session())
+        fb = ApiMethods(sess)
         fb.send_feedback(cls.fb1.json)
         fb.send_feedback(cls.fb2.json)
         fb.send_feedback(cls.fb3.json)

@@ -1,8 +1,8 @@
 import unittest
 import time
-from src.pages.pages.SignUpPage import SignUpPage
-from src.pages.pages.FeedbackPage import FeedbackPage
-from src.pages.popups.OnboardingPopup import *
+from src.pageobjects.pages.SignUpPage import SignUpPage
+from src.pageobjects.pages.FeedbackPage import FeedbackPage
+from src.pageobjects.popups.OnboardingPopup import *
 from tests.BaseTest import BaseTest
 
 
