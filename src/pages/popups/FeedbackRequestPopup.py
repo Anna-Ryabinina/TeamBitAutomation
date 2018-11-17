@@ -1,3 +1,5 @@
+import time
+
 from selene.api import *
 from src.locators import *
 from pynput.keyboard import Controller, Key
@@ -25,6 +27,7 @@ class FeedbackRequestPopup(object):
         keyboard = Controller()
         self.recipient_input.send_keys(name)
         keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
         return FeedbackRequestPopup()
 
     def add_value(self):

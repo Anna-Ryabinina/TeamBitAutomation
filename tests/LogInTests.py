@@ -2,8 +2,8 @@ import unittest
 from selene.api import *
 from src.pages_url import *
 from tests.BaseTest import BaseTest
-from src.pages.LogInPage import LoginPage
-from src.pages.FeedbackPage import FeedbackPage
+from src.pages.pages.LogInPage import LoginPage
+from src.pages.pages.FeedbackPage import FeedbackPage
 from src.test_data_generators.User import User
 from src.test_data import *
 

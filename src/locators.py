@@ -91,7 +91,7 @@ FEEDBACK_BLOCK_DELETE_LINK = '.icon remove-icon'
 
 
         # RequestPage
-REQUEST_MENU_PENDONG_REQUESTS = '//*[@id="app"]/div/div[2]/nav/a[1]'
+REQUEST_MENU_PENDING_REQUESTS = '//*[@id="app"]/div/div[2]/nav/a[1]'
 REQUEST_MENU_SENT_REQUESTS = '//*[@id="app"]/div/div[2]/nav/a[2]'
 REQUEST_MENU_RESOLVED_REQUESTS = '//*[@id="app"]/div/div[2]/nav/a[3]'
 REQUEST_BLOCK = '.one-request'
@@ -104,7 +104,7 @@ REQUEST_BLOCK_SEND_FEEDBACK_BUTTON = './/*[@class="icon send-feedback"]'
 REQUEST_BLOCK_DISMISS_LINK = './/*[@class="icon revoke-blue-icon"]'
 
         # SurveyPage
-SURVEY_CREATE_NEW_SERVEY_BUTTON     = '//*[@id="app"]/div/div[1]/div/button'
+SURVEY_CREATE_NEW_SURVEY_BUTTON     = '//*[@id="app"]/div/div[1]/div/button'
 SURVEY_MENU_SURVEY     = '//*[@id="app"]/div/div[2]/nav/a'
 SURVEY_BLOCK     = '.recurring-one-survey'
 SURVEY_BLOCK_TITLE     = '.recurring-one-survey-question'
@@ -141,10 +141,66 @@ SURVEY_POPUP_RUN_NOW_BUTTON = "//*[@id=\"modal\"]/div/div/div[1]/div[2]/div/span
 SURVEY_POPUP_WHO_REQUEST_FROM_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[6]/div/div/div'
 SURVEY_POPUP_WHO_ABLE_TO_SEE_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[7]/div/div/div/input'
 
-MAIN_MEMU_FEEDBACK = ''
+MAIN_MENU_FEEDBACK = ''
 MAIN_MENU_REQUESTS = ''
 MAIN_MENU_SURVEYS = ''
 MAIN_MENU_REVIEWS = ''
+
+TEAMMATE_EDIT_BUTTON = '//*[@id="app"]/div/div[3]/div[2]/div/section[2]/div/div[6]/button'
+TEAMMATE_SEND_FEEDBACK_BUTTON = '//*[@id="app"]/div/div[3]/div[2]/div/section[2]/div/div[6]/button[1]'
+TEAMMATE_REQUEST_FEEDBACK_BUTTON = '//*[@id="app"]/div/div[3]/div[2]/div/section[2]/div/div[6]/button[2]'
+
+EDIT_PROFILE_FIRST_NAME_INPUT = '//*[@id="modal"]/div/div/div[3]/div[1]/div[1]/fieldset/input'
+EDIT_PROFILE_LAST_NAME_INPUT = '//*[@id="modal"]/div/div/div[3]/div[1]/div[2]/fieldset/input'
+EDIT_PROFILE_BIO_INPUT = '//*[@id="modal"]/div/div/div[3]/div[2]/div[1]/textarea'
+EDIT_PROFILE_JOB_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[1]/input'
+EDIT_PROFILE_YOU_MANAGE_INPUT = '//*[@id="modal"]/div/div/div[3]/div[3]/div/div/input'
+EDIT_PROFILE_YOU_REPORT_TO_INPUTE = '//*[@id="modal"]/div/div/div[3]/div[5]/div/div/input'
+EDIT_PROFILE_YOU_WORK_WITH_INPUT = '//*[@id="modal"]/div/div/div[3]/div[5]/div/div/input'
+EDIT_PROFILE_LOCATION_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[2]/input'
+EDIT_PROFILE_PHONE_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[3]/input'
+EDIT_PROFILE_SLACK_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[4]/input'
+EDIT_PROFILE_SKYPE_INPUTED = '//*[@id="modal"]/div/div/div[3]/fieldset[5]/input'
+EDIT_PROFILE_EMAIL_INPUTED = '//*[@id="modal"]/div/div/div[3]/fieldset[6]/input'
+EDIT_PROFILE_TWITTER_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[7]/input'
+EDIT_PROFILE_FACEBOOK_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[8]/input'
+EDIT_PROFILE_LINKEDIN_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[9]/input'
+EDIT_PROFILE_INSTAGRAM_INPUT = '//*[@id="modal"]/div/div/div[3]/fieldset[10]/input'
+EDIT_PROFILE_CANCEL_BUTTON = '//*[@id="modal"]/div/footer/button[2]'
+EDIT_PROFILE_SAVE_BUTTON = '//*[@id="modal"]/div/footer/button[1]'
+EDIT_PROFILE_CLOSE_BUTTON = '//*[@id="modal"]/div/button'
+EDIT_PROFILE_POPUP = '//*[@id="modal"]/div'
+
+COMPANY_SETTINGS_POPUP = '//*[@id="modal"]/div'
+COMPANY_SETTINGS_CLOSE_BUTTON = '//*[@id="modal"]/div/button'
+COMPANY_SETTINGS_CANCEL_BUTTON = '//*[@id="modal"]/div/footer/button[2]'
+COMPANY_SETTINGS_SAVE_BUTTON = '//*[@id="modal"]/div/footer/button[1]'
+COMPANY_SETTINGS_NAME_INPUT = '//*[@id="modal"]/div/div/div[1]/fieldset/input'
+COMPANY_SETTINGS_VALUE_BLOCK = '.o-editable-value-row'
+COMPANY_SETTINGS_VALUE_ICON_LIST = '.selectbox'
+COMPANY_SETTINGS_VALUE_NAME_INPUT = './div[2]/input'
+COMPANY_SETTINGS_VALUE_DELETE_BUTTON = './div[3]/button'
+COMPANY_SETTINGS_ADD_VALUE_BUTTON = '//*[@id="modal"]/div/div/div[2]/div/button'
+
+PEOPLE_INVITE_BUTTON = '//*[@id="app"]/div/div[1]/div/button'
+PEOPLE_TEAMMATE_ROW = '.one-user'
+PEOPLE_TEAMMATE_NAME_LINK = '.username'
+PEOPLE_TEAMMATE_SEND_FEEDBACK_BUTTON = './td[2]/button'
+PEOPLE_TEAMMATE_REQUEST_FEEDBACK_BUTTON = './td[3]/button'
+PEOPLE_TEAMMATE_MAKE_ADMIN_BUTTON = './td[4]/button[1]'
+PEOPLE_TEAMMATE_MAKE_USER_BUTTON = './td[4]/button[1]'
+PEOPLE_TEAMMATE_DELETE_USER = './td[4]/button[2]'
+
+TEAMS_CREATE_NEW_BUTTON = '//*[@id="app"]/div/div[1]/div/button'
+TEAM_ROW = '.table-row'
+TEAM_SEND_FEEDBACK_BUTTON = './td[3]/button[1]'
+TEAM_REQUEST_FEEDBACK_BUTTON = './td[3]/button[2]'
+TEAM_EDIT_BUTTON = './td[3]/button[3]'
+TEAM_LEAVE_BUTTON = './td[4]/button'
+TEAM_JOIN_BUTTON = './td[4]/button'
+TEAM_NAME = './td[2]/div/div[1]/b'
+
+
 
 
 

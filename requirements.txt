@@ -6,6 +6,8 @@ configparser==3.5.0
 crayons==0.1.2
 future==0.16.0
 idna==2.7
+pynput==1.4
+python-xlib==0.23
 requests==2.20.0
 selene==1.0.0a13
 selenium==2.53.1

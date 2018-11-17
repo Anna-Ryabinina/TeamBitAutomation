@@ -30,6 +30,13 @@ class OnboardingPopup(object):
                     return SurveyBlockOnOnboarding(survey)
             return None
 
+    def get_survey_block_by_id(self, id):
+        surveys = self.survey_blocks
+        if len(surveys) == 0 or len(surveys) <= id:
+            return None
+        else:
+            return SurveyBlockOnOnboarding(surveys[id])
+
     def fill_account_info(self):
         self.first_name_input.set('test')
         self.last_name_input.set('test')
@@ -61,4 +68,13 @@ class SurveyBlockOnOnboarding(object):
         self.text = survey.element(by.xpath(ONBOARDING_SURVEY_TEXT)).text
         self.set_live_button = survey.element(by.xpath(ONBOARDING_SURVEY_SET_LIVE_BUTTON))
         self.live_button = survey.element(by.xpath(ONBOARDING_SURVEY_LIVE_BUTTON))
+        self.survey = survey
+
+    def click_live_button(self):
+        self.live_button.click()
+        return SurveyBlockOnOnboarding(self.survey)
+
+    def click_set_live_button(self):
+        self.set_live_button.click()
+        return SurveyBlockOnOnboarding(self.survey)
 

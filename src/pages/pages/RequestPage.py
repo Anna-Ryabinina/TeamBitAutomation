@@ -5,7 +5,7 @@ from src.pages_url import *
 
 class RequestsPage(object):
     def __init__(self):
-        self.menu_pending_link = s(by.xpath(REQUEST_MENU_PENDONG_REQUESTS))
+        self.menu_pending_link = s(by.xpath(REQUEST_MENU_PENDING_REQUESTS))
         self.menu_sent_link = s(by.xpath(REQUEST_MENU_SENT_REQUESTS))
         self.menu_resolved_link = s(by.xpath(REQUEST_MENU_RESOLVED_REQUESTS))
         self.request_feedback_button = s(by.xpath(REQUEST_REQUESTS_FEEDBACK_BUTTON))

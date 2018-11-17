@@ -45,12 +45,14 @@ class SurveyPopup(object):
         keyboard = Controller()
         self.who_request_from_input.send_keys(name)
         keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
         return SurveyPopup()
 
     def type_who_able_to_see(self, name):
         keyboard = Controller()
         self.who_able_to_see_input.send_keys(name)
         keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
         return SurveyPopup()
 
 

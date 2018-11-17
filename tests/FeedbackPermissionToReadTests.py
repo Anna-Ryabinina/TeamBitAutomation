@@ -1,3 +1,4 @@
+import datetime
 import unittest
 import requests
 from selenium import webdriver
@@ -5,11 +6,11 @@ from selene.api import *
 from webdriver_manager.chrome import ChromeDriverManager
 
 from tests.BaseTest import BaseTest
-from src.pages.LogInPage import LoginPage
-from src.pages.FeedbackPage import FeedbackPage
+from src.pages.pages.LogInPage import LoginPage
+from src.pages.pages.FeedbackPage import FeedbackPage
 from src.api_helpers.Authorisation import Authorisation
 from src.api_helpers.ApiMethods import ApiMethods
-from src.test_data_generators.Feedback_payload import FeedbackPayload
+from src.test_data_generators.FeedbackPayload import FeedbackPayload
 from src.test_data_generators.User import User
 from src.test_data_generators.Team import Team
 from src.test_data import *
@@ -20,22 +21,24 @@ class FeedbackPermissionToRead(BaseTest):
 
     @classmethod
     def setUpClass(cls):
+        cls.execute_date = datetime.datetime.today().strftime('%c')
+        print('Test started at: ' + cls.execute_date)
         cls.user1 = User(user_1)
         cls.user2 = User(user_2)
         cls.user3 = User(user_3)
         cls.team13 = Team(team_13)
         cls.team34 = Team(team_34)
-        cls.fb1 = FeedbackPayload([cls.user1]).generate_feedback_data()
-        cls.fb2 = FeedbackPayload([cls.user1], shared=True).generate_feedback_data()
-        cls.fb3 = FeedbackPayload([cls.user3]).generate_feedback_data()
-        cls.fb4 = FeedbackPayload([cls.user3], shared=True).generate_feedback_data()
-        cls.fb5 = FeedbackPayload([cls.team13]).generate_feedback_data()
-        cls.fb6 = FeedbackPayload([cls.team34]).generate_feedback_data()
+
+        cls.fb1 = FeedbackPayload([cls.user1], text_prefix=cls.execute_date).generate_feedback_data()
+        cls.fb2 = FeedbackPayload([cls.user1], text_prefix=cls.execute_date, shared=True).generate_feedback_data()
+        cls.fb3 = FeedbackPayload([cls.user3], text_prefix=cls.execute_date).generate_feedback_data()
+        cls.fb4 = FeedbackPayload([cls.user3], text_prefix=cls.execute_date, shared=True).generate_feedback_data()
+        cls.fb5 = FeedbackPayload([cls.team13], text_prefix=cls.execute_date).generate_feedback_data()
+        cls.fb6 = FeedbackPayload([cls.team34], text_prefix=cls.execute_date).generate_feedback_data()
 
         sess = requests.session()
-        auth = Authorisation(sess)
+        auth = Authorisation(sess).login_with_email(cls.user2)
         fb = ApiMethods(auth.get_session())
-        auth.login_with_email(cls.user2)
         fb.send_feedback(cls.fb1.json)
         fb.send_feedback(cls.fb2.json)
         fb.send_feedback(cls.fb3.json)

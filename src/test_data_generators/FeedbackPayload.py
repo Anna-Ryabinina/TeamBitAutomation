@@ -2,12 +2,14 @@ import datetime
 
 
 class FeedbackPayload(object):
-    def __init__(self, recipient_array, shared=False, value=None):
-        self.recipient = recipient_array
-        self.shared = shared
-        self.value = value
 
-    def get_recepient_ids_array(self):
+    def __init__(self, recipient_array, text_prefix='', shared=None, value=None):
+        self.recipient = recipient_array
+        self.value = value
+        self.text = text_prefix
+        self.shared = shared
+
+    def get_recipient_ids_array(self):
         i = []
         for r in self.recipient:
             i.append(r.id)
@@ -26,18 +28,14 @@ class FeedbackPayload(object):
             return "private "
 
     def generate_feedback_data(self):
+        text = self.text + self.is_public_str() + ' feedback to ' + self.get_recipient_names_str()
         fb = {
-            "recepients":self.get_recepient_ids_array(),
+            "recepients":self.get_recipient_ids_array(),
             "value" : self.value,
-            "text": self.return_feedback_text(),
-            "is_shared":self.shared
+            "text": text,
+            "is_shared": self.shared
         }
         return FeedbackData(fb)
-
-    def return_feedback_text(self):
-        D = datetime.date.today().strftime('%b %d')
-        st = self.is_public_str() + D + " to " + self.get_recipient_names_str()
-        return st
 
 
 class FeedbackData(object):

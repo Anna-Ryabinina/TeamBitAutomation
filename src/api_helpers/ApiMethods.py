@@ -13,3 +13,4 @@ class ApiMethods(object):
     def send_request(self, payload):
         r = self.session.post(SEND_REQUEST_API_URL, json=payload)
         return r
+

@@ -6,7 +6,7 @@ from src.pages_url import *
 class SurveyPage(object):
 
     def __init__(self):
-        self.create_new_survey_button = s(by.xpath(SURVEY_CREATE_NEW_SERVEY_BUTTON))
+        self.create_new_survey_button = s(by.xpath(SURVEY_CREATE_NEW_SURVEY_BUTTON))
         self.edit_button = s(by.xpath(SURVEY_INFO_EDIT_BUTTON))
         self.pause_button = s(by.xpath(SURVEY_INFO_PAUSE_BUTTON))
         self.back_button = s(by.xpath(SURVEY_INFO_BACK_BUTTON))

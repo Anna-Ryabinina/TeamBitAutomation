@@ -4,8 +4,8 @@ from selene.api import *
 from src.pages_url import *
 
 from tests.BaseTest import BaseTest
-from src.pages.SignUpPage import SignUpPage
-from src.pages.OnboardingPopup import OnboardingPopup
+from src.pages.pages.SignUpPage import SignUpPage
+from src.pages.popups.OnboardingPopup import OnboardingPopup
 
 
 class SignUpTests(BaseTest):
@@ -16,7 +16,7 @@ class SignUpTests(BaseTest):
         OnboardingPopup().popup.should(be.existing).should(be.visible)
 
     def test_sign_up_empty_email(self):
-        SignUpPage().open().signup(" ").email_error_message.should(be.visible)
+        SignUpPage().open().signup('').email_error_message.should(be.visible)
 
 
     def test_sign_up_with_google(self):
