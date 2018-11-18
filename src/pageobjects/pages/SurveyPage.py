@@ -21,7 +21,7 @@ class SurveyPage(object):
             return None
         else:
             for srv in srvs:
-                if text in srv.element(by.xpath(SURVEY_BLOCK_TITLE)).text:
+                if text in srv.element(SURVEY_BLOCK_TITLE).text:
                     return SurveyBlock(srv)
             return None
 

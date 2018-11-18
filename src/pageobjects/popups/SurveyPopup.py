@@ -5,7 +5,7 @@ from pynput.keyboard import Controller, Key
 
 class SurveyPopup(object):
     def __init__(self):
-        self.popup = s(by.css(SURVEY_POPUP))
+        self.popup = s(by.xpath(SURVEY_POPUP))
         self.close_button = s(by.xpath(SURVEY_POPUP_CLOSE_BUTTON))
         self.empty_template = s(by.xpath(SURVEY_POPUP_CREATE_EMPTY_SURVEY_BUTTON))
         self.choose_another_template_link = s(by.xpath(SURVEY_POPUP_OR_CHOOSE_ANOTHER_TEMPLAY_LINK))
@@ -33,6 +33,9 @@ class SurveyPopup(object):
         self.add_question_button.click()
         return SurveyPopup()
 
+    def get_question_by_id(self, id=0):
+        return SurveyQuestionBlock(self.questions[id])
+
     def choose_date_time(self):
         self.choose_date_time_button.click()
         return SurveyPopup()
@@ -41,26 +44,51 @@ class SurveyPopup(object):
         self.run_now_button.click()
         return SurveyPopup()
 
-    def type_who_request_feedback_from(self, name):
+    def type_who_request_feedback_from(self, user):
         keyboard = Controller()
-        self.who_request_from_input.send_keys(name)
+        self.who_request_from_input.send_keys(user.full_name)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
         return SurveyPopup()
 
-    def type_who_able_to_see(self, name):
+    def type_who_able_to_see(self, user):
         keyboard = Controller()
-        self.who_able_to_see_input.send_keys(name)
+        self.who_able_to_see_input.send_keys(user.full_name)
         keyboard.press(Key.enter)
         keyboard.release(Key.enter)
+        return SurveyPopup()
+
+    def type_name(self, name):
+        self.title_input.set(name)
         return SurveyPopup()
 
 
 class SurveyQuestionBlock(object):
     def __init__(self, question):
-        self.question_input = question.element(SURVEY_POPUP_QUESTION_TEXT_INPUT)
-        self.remove_question_button = question.element(SURVEY_POPUP_REMOVE_QUESTION_BUTTON)
-        self.text_option = question.element(SURVEY_POPUP_QUESTION_TEXT_OPTION_BUTTON)
-        self.rating_option = question.element(SURVEY_POPUP_QUESTION_RATING_OPTION_BUTTON)
-        self.public_option = question.element(SURVEY_POPUP_QUESTION_PUBLIC_OPTION_BUTTON)
-        self.anonymous_option = question.element(SURVEY_POPUP_QUESTION_ANONYMOUS_OPTION_BUTTON)
+        self.question_input = question.element(by.xpath(SURVEY_POPUP_QUESTION_TEXT_INPUT))
+        self.remove_question_button = question.element(by.xpath(SURVEY_POPUP_REMOVE_QUESTION_BUTTON))
+        self.text_option = question.element(by.xpath(SURVEY_POPUP_QUESTION_TEXT_OPTION_BUTTON))
+        self.rating_option = question.element(by.xpath(SURVEY_POPUP_QUESTION_RATING_OPTION_BUTTON))
+        self.public_option = question.element(by.xpath(SURVEY_POPUP_QUESTION_PUBLIC_OPTION_BUTTON))
+        self.anonymous_option = question.element(by.xpath(SURVEY_POPUP_QUESTION_ANONYMOUS_OPTION_BUTTON))
+        self.question = question
+
+    def type_question(self, text):
+        self.question_input.set(text)
+        return SurveyQuestionBlock(self.question)
+
+    def choose_text_option(self):
+        self.text_option.click()
+        return SurveyQuestionBlock(self.question)
+
+    def choose_rating_option(self):
+        self.rating_option.click()
+        return SurveyQuestionBlock(self.question)
+
+    def choose_public_option(self):
+        self.public_option.click()
+        return SurveyQuestionBlock(self.question)
+
+    def choose_anonymous_option(self):
+        self.anonymous_option.click()
+        return SurveyQuestionBlock(self.question)

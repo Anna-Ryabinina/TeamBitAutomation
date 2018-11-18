@@ -10,10 +10,7 @@ class FeedbackPayload(object):
         self.shared = shared
 
     def get_recipient_ids_array(self):
-        i = []
-        for r in self.recipient:
-            i.append(r.id)
-        return i
+        return [r.id for r in self.recipient]
 
     def get_recipient_names_str(self):
         n = ""

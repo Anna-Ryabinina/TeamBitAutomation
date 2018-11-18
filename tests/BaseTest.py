@@ -19,6 +19,7 @@ class BaseTest(unittest.TestCase):
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         #self.driver = webdriver.Chrome(DRIVER_PATH)
         browser.set_driver(self.driver)
+        browser.driver().maximize_window()
 
     def tearDown(self):
         if self.driver is not None:

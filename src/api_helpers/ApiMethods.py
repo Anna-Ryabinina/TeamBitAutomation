@@ -14,3 +14,6 @@ class ApiMethods(object):
         r = self.session.post(SEND_REQUEST_API_URL, json=payload)
         return r
 
+    def create_survey(self, payload):
+        r = self.session.post(CREATE_SURVEY_URL, json=payload)
+        return r

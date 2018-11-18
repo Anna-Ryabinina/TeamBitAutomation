@@ -122,7 +122,7 @@ SURVEY_POPUP_CREATE_EMPTY_SURVEY_BUTTON     = '//*[@id="modal01"]/div/div/div/di
 SURVEY_POPUP_CREATE_SURVEY_BUTTON     = '//*[@id="modal01"]/div/div/div/div[2]/div[2]'
 SURVEY_POPUP_OR_CHOOSE_ANOTHER_TEMPLAY_LINK     = '//*[@id="modal"]/div/header/p/a'
 SURVEY_POPUP_SURVEY_NAME_TEXT_INPUT     = '//*[@id="modal"]/div/div/div[1]/div[1]/div[1]/fieldset/input'
-SURVEY_POPUP_QUESTION_SECTION     = '//*[@class="create-survey__one-question"]'
+SURVEY_POPUP_QUESTION_SECTION     = './/*[@data-role="survey-question"]'
 SURVEY_POPUP_QUESTION_TEXT_INPUT     = './/*[@data-role="survey-question-text"]'
 SURVEY_POPUP_QUESTION_RATING_OPTION_BUTTON     = './/*[@data-role="survey-question-type-range"]'
 SURVEY_POPUP_QUESTION_TEXT_OPTION_BUTTON     = './/*[@data-role="survey-question-type-text"]'
