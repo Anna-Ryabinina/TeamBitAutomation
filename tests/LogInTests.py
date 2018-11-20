@@ -12,7 +12,7 @@ class LoginTests(BaseTest):
 
     def test_sign_in_with_email(self):
         user = User(user_1)
-        LoginPage().open().login(user.email, user.password)
+        LoginPage().open().login_as_user(user)
         FeedbackPage().logo.should(be.visible)
         assert FEEDBACK_ALL_URL in browser.driver().current_url
 

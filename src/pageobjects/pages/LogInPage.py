@@ -22,6 +22,12 @@ class LoginPage(object):
         self.login_button.click()
         return LoginPage()
 
+    def login_as_user(self, user):
+        self.email_input.set(user.email)
+        self.password_input.set(user.password)
+        self.login_button.click()
+        return LoginPage()
+
     def open(self):
         browser.open_url(LOGIN_PAGE_URL)
         return LoginPage()
