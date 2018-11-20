@@ -3,7 +3,6 @@ import requests
 import time
 
 from src.test_data import *
-from src.api_helpers.Authorisation import Authorisation
 from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.User import User
 from src.test_data_generators.Team import Team
@@ -80,7 +79,7 @@ class FeedbackTests(BaseTest):
         payload = FeedbackPayload([user2], text_prefix=self.execute_date).generate_feedback_data()
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user1)
+        ApiMethods(sess).login_as_user(user1)
         ApiMethods(sess).send_feedback(payload.json)
         sess.close()
 
@@ -106,7 +105,7 @@ class FeedbackTests(BaseTest):
         payload = FeedbackPayload([user1], text_prefix=self.execute_date).generate_feedback_data()
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user2)
+        ApiMethods(sess).login_as_user(user2)
         ApiMethods(sess).send_feedback(payload.json)
         sess.close()
 
@@ -129,7 +128,7 @@ class FeedbackTests(BaseTest):
         payload = FeedbackPayload([user3], text_prefix=self.execute_date, shared=True).generate_feedback_data()
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user1)
+        ApiMethods(sess).login_as_user(user1)
         ApiMethods(sess).send_feedback(payload.json)
         sess.close()
 
@@ -152,7 +151,7 @@ class FeedbackTests(BaseTest):
         payload = FeedbackPayload([user1], text_prefix =self.execute_date, shared=True).generate_feedback_data()
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user3)
+        ApiMethods(sess).login_as_user(user3)
         ApiMethods(sess).send_feedback(payload.json)
         sess.close()
 

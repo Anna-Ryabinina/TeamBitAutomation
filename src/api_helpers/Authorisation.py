@@ -9,7 +9,7 @@ class Authorisation(object):
     def get_session(self):
         return self.session
 
-    def login_with_email(self, user):
+    def login_as_user(self, user):
         payload = {
             "username": user.email,
             "password": user.password

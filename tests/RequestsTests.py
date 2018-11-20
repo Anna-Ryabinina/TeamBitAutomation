@@ -7,7 +7,6 @@ from src.test_data import *
 from src.test_data_generators.User import User
 from src.test_data_generators.RequestPayload import RequestPayload
 from src.api_helpers.ApiMethods import ApiMethods
-from src.api_helpers.Authorisation import Authorisation
 from src.pageobjects.pages.LogInPage import LoginPage
 from src.pageobjects.pages.RequestPage import RequestsPage
 from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
@@ -45,7 +44,7 @@ class RequestTests(BaseTest):
         user2 = User(user_2)
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user2)
+        ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)
@@ -69,7 +68,7 @@ class RequestTests(BaseTest):
         user2 = User(user_2)
 
         sess = requests.session()
-        Authorisation(sess).login_with_email(user2)
+        ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)
@@ -92,7 +91,7 @@ class RequestTests(BaseTest):
         request_text = self.execute_date + 'test_user_can_dismiss_request'
         sess = requests.session()
 
-        Authorisation(sess).login_with_email(user2)
+        ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)

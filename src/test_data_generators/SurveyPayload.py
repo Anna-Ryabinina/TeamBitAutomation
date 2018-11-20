@@ -1,4 +1,3 @@
-import datetime
 
 class SurveyPayload(object):
 
@@ -16,6 +15,15 @@ class SurveyPayload(object):
              "type": 2,
              "isAnonymous": is_anonymous}
         )
+        return SurveyPayload(self.title)
+
+    def add_rating_question(self, question_text, is_anonymous=False):
+        self.questions.append(
+            {"text": question_text,
+             "type": 1,
+             "isAnonymous": is_anonymous}
+        )
+        return SurveyPayload(self.title)
 
     def set_schedule(self, period='dayly', day=1, time=9):
         self.schedule = {"period": period, "day": day, "time": time, "timezone": "Europe/Kiev"}
@@ -23,10 +31,16 @@ class SurveyPayload(object):
     def set_receivers(self, users):
         r = [user.id for user in users]
         self.receivers = r
+        return SurveyPayload(self.title)
 
     def set_viewers(self, users):
         v = [user.id for user in users]
         self.viewers = v
+        return SurveyPayload(self.title)
+
+    def set_title(self, title):
+        self.title = title
+        return SurveyPayload(self.title)
 
     def generate_new_survey_data_run_now(self):
         return {

@@ -8,7 +8,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from tests.BaseTest import BaseTest
 from src.pageobjects.pages.LogInPage import LoginPage
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
-from src.api_helpers.Authorisation import Authorisation
 from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.FeedbackPayload import FeedbackPayload
 from src.test_data_generators.User import User
@@ -37,7 +36,7 @@ class FeedbackPermissionToRead(BaseTest):
         cls.fb6 = FeedbackPayload([cls.team34], text_prefix=cls.execute_date).generate_feedback_data()
 
         sess = requests.session()
-        auth = Authorisation(sess).login_with_email(cls.user2)
+        ApiMethods(sess).login_as_user(cls.user2)
         fb = ApiMethods(sess)
         fb.send_feedback(cls.fb1.json)
         fb.send_feedback(cls.fb2.json)
