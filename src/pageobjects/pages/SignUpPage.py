@@ -11,10 +11,16 @@ class SignUpPage(object):
         self.signup_with_slack_button = s(by.xpath(SIGNUP_WITH_SLACK_BUTTON))
         self.signin_here_link = s(by.xpath(SIGNIN_HERE_LINK))
         self.email_error_message = s(by.xpath(SIGNUP_EMAIL_ERROR_TEXT))
+        self.sign_up_to_team_button = s(by.xpath(SIGN_UP_TO_TEAM_BUTTON))
 
     def signup(self, email):
         self.email_input.set(email)
         self.signup_button.click()
+        return SignUpPage()
+
+    def signup_to_team(self, email):
+        self.email_input.set(email)
+        self.sign_up_to_team_button.click()
         return SignUpPage()
 
     def open(self):

@@ -14,6 +14,7 @@ SIGNIN_FORGOT_LINK = '//*[text()="Forgot?"]'
 SINGIN_EMAIL_ERROR_TEXT = '//*[@id="app"]/div/div/div/div/div[2]/div/div/fieldset/span/span'
 SIGNIN_PASSWORD_ERROR_TEXT = '//*[@id="app"]/div/div/div/div/div[2]/div/div/div[4]/div[2]/div[2]/span'
 SIGNUP_EMAIL_ERROR_TEXT = '//*[@id="app"]/div/div/div/div/div[2]/div/div/fieldset/span/span'
+SIGN_UP_TO_TEAM_BUTTON = '//*[@id="app"]/div/div/div/div[2]/div/div/div[4]/button'
 
 # OnboardingPopup appears after signup
 ONBOARDING_POPUP = '.setup-account'
