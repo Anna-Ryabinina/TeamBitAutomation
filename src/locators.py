@@ -76,6 +76,9 @@ FEEDBACK_POPUP_FEEDBACK_TEMPLATE_ICON = '//*[@id="modal"]/div/div/footer/div/div
 FEEDBACK_POPUP_REQUEST_TEMPLATE_ICON = '//*[@id="modal"]/div/div/footer/div/div/i'
 FEEDBACK_POPUP_TEMPLATE_TO_CHOOSE = '//*[@id="modal"]/div/div/footer/div/div[1]/div/div/section'
 FEEDBACK_POPUP_MAKE_PUBLIC_ICON = '//*[@id="modal"]/div/div/footer/div/div[2]/i'
+FEEDBACK_POPUP_RATING_FIRST_ITEM = '//*[@id="modal"]/div/div/div[2]/div[1]'
+FEEDBACK_POPUP_RATING_SECOND_ITEM = '//*[@id="modal"]/div/div/div[2]/div[2]'
+
 
         # FeedbackBlock
 FEEDBACK_BLOCK_VALUE_ICON = ".//*[@class='emojione']"
@@ -89,6 +92,18 @@ FEEDBACK_BLOCK_COMMENT_ICON = './/*[@data-role="comment-feedback"]'
 FEEDBACK_BLOCK_MORE_LINK = '.additional-feedback-buttons'
 FEEDBACK_BLOCK_EDIT_LINK = '.icon edit-icon'
 FEEDBACK_BLOCK_DELETE_LINK = '.icon remove-icon'
+
+SURVEY_ANSWER_BLOCK = '.one-feedback-context'
+SURVEY_ANSWER_BLOCK_QUESTION_TEXT = './div/div[2]'
+SURVEY_ANSWER_BLOCK_SENDER = '.recepient teammate-link'
+SURVEY_ANSWER_BLOCK_PEOPLE = './/*[@class="one-feedback"]/div[@class="header"]'
+SURVEY_ANSWER_BLOCK_ADD_TO_PRAISE_LINK = './/*[@class="one-feedback"]/div[@class="actions"]/div[1]'
+SURVEY_ANSWER_BLOCK_FLAG_LINK = './/*[@class="one-feedback"]/div[@class="actions"]/div[2]'
+SURVEY_ANSWER_BLOCK_ANSWER_TEXT = './/*[@class="one-feedback"]/div[@class="text"]'
+SURVEY_ANSWER_BLOCK_RATING_ICON = './/*[@class="one-feedback"]'
+SURVEY_ANSWER_BLOCK_VALUE_ICON = './/*[@class="one-feedback"]'
+SURVEY_ANSWER_BLOCK_LIKE_ICON = './/*[@class="one-feedback"]/div[@class="actions"]/div[3]'
+SURVEY_ANSWER_BLOCK_COMMENT_ICON = './/*[@class="one-feedback"]/div[@class="actions"]/div[4]'
 
 
         # RequestPage
@@ -201,6 +216,7 @@ TEAM_EDIT_BUTTON = './td[3]/button[3]'
 TEAM_LEAVE_BUTTON = './td[4]/button'
 TEAM_JOIN_BUTTON = './td[4]/button'
 TEAM_NAME = './td[2]/div/div[1]/b'
+
 
 
 

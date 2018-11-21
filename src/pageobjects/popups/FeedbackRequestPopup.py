@@ -22,6 +22,8 @@ class FeedbackRequestPopup(object):
         self.recipient_added = s(FEEDBACK_POPUP_RECIPIENT_ADDED)
         self.rq_template_icon = s(by.xpath(FEEDBACK_POPUP_REQUEST_TEMPLATE_ICON))
         self.send_request_button = s(by.xpath(FEEDBACK_POPUP_SEND_REQUEST_BUTTON))
+        self.rating_item_0 = s(by.xpath(FEEDBACK_POPUP_RATING_FIRST_ITEM))
+        self.rating_item_1 = s(by.xpath(FEEDBACK_POPUP_RATING_SECOND_ITEM))
 
     def type_recipient(self, name):
         keyboard = Controller()
@@ -71,6 +73,13 @@ class FeedbackRequestPopup(object):
 
     def click_send_request_button(self):
         self.send_request_button.click()
+        return FeedbackRequestPopup()
+
+    def click_rating_item(self, id=0):
+        if id == 0:
+            self.rating_item_0.click()
+        else:
+            self.rating_item_1.click()
         return FeedbackRequestPopup()
 
 

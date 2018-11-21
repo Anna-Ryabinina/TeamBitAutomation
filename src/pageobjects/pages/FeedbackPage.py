@@ -27,6 +27,16 @@ class FeedbackPage(object):
                     return FeedbackBlock(fb)
             return None
 
+    def get_survey_answer_by_text(self, text):
+        fbs = ss(SURVEY_ANSWER_BLOCK)
+        if len(fbs) == 0:
+            return None
+        else:
+            for fb in fbs:
+                if text in fb.element(by.xpath(SURVEY_ANSWER_BLOCK_QUESTION_TEXT)).text:
+                    return SurveyAnswerBlock(fb)
+            return None
+
     def click_menu_all_link(self):
         self.menu_all_link.click()
         return FeedbackPage()
@@ -97,4 +107,14 @@ class FeedbackBlock(object):
         self.more = fb.element(FEEDBACK_BLOCK_MORE_LINK)
         self.edit = fb.element(FEEDBACK_BLOCK_EDIT_LINK)
         self.delete = fb.element(FEEDBACK_BLOCK_DELETE_LINK)
+
+
+class SurveyAnswerBlock(object):
+    def __init__(self, fb):
+        self.sender = fb.element(SURVEY_ANSWER_BLOCK_SENDER)
+        self.question_text = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_QUESTION_TEXT))
+        self.people = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_PEOPLE))
+        self.answer_text = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_ANSWER_TEXT))
+        self.add_to_praise_link = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_ADD_TO_PRAISE_LINK))
+        self.flag_link = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_FLAG_LINK))
 

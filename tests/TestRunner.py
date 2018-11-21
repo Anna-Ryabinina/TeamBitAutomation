@@ -7,6 +7,7 @@ from tests.LogInTests import LoginTests
 from tests.RequestsTests import RequestTests
 from tests.OnboardingTests import OnboardingTests
 from tests.SignUpTests import SignUpTests
+from tests.SurveyTest import SurveyTest
 
 
 
@@ -20,7 +21,8 @@ if __name__ == '__main__':
         loader.loadTestsFromTestCase(FeedbackFormElementsTests),
         loader.loadTestsFromTestCase(FeedbackPermissionToRead),
         loader.loadTestsFromTestCase(FeedbackTests),
-        loader.loadTestsFromTestCase(RequestTests)
+        loader.loadTestsFromTestCase(RequestTests),
+        loader.loadTestsFromTestCase(SurveyTest)
     ))
 
     runner = TextTestRunner()
