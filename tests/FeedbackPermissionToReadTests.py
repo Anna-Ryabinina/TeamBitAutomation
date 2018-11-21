@@ -28,22 +28,22 @@ class FeedbackPermissionToRead(BaseTest):
         cls.team13 = Team(team_13)
         cls.team34 = Team(team_34)
 
-        cls.fb1 = FeedbackPayload([cls.user1], text_prefix=cls.execute_date).generate_feedback_data()
-        cls.fb2 = FeedbackPayload([cls.user1], text_prefix=cls.execute_date, shared=True).generate_feedback_data()
-        cls.fb3 = FeedbackPayload([cls.user3], text_prefix=cls.execute_date).generate_feedback_data()
-        cls.fb4 = FeedbackPayload([cls.user3], text_prefix=cls.execute_date, shared=True).generate_feedback_data()
-        cls.fb5 = FeedbackPayload([cls.team13], text_prefix=cls.execute_date).generate_feedback_data()
-        cls.fb6 = FeedbackPayload([cls.team34], text_prefix=cls.execute_date).generate_feedback_data()
+        cls.fb1 = FeedbackPayload().generate_feedback_to_send([cls.user1], cls.execute_date)
+        cls.fb2 = FeedbackPayload().generate_feedback_to_send([cls.user1], cls.execute_date, is_shared=True)
+        cls.fb3 = FeedbackPayload().generate_feedback_to_send([cls.user3], cls.execute_date)
+        cls.fb4 = FeedbackPayload().generate_feedback_to_send([cls.user3], cls.execute_date, is_shared=True)
+        cls.fb5 = FeedbackPayload().generate_feedback_to_send([cls.team13], cls.execute_date)
+        cls.fb6 = FeedbackPayload().generate_feedback_to_send([cls.team34], cls.execute_date)
 
         sess = requests.session()
         ApiMethods(sess).login_as_user(cls.user2)
         fb = ApiMethods(sess)
-        fb.send_feedback(cls.fb1.json)
-        fb.send_feedback(cls.fb2.json)
-        fb.send_feedback(cls.fb3.json)
-        fb.send_feedback(cls.fb4.json)
-        fb.send_feedback(cls.fb5.json)
-        fb.send_feedback(cls.fb6.json)
+        fb.send_feedback(cls.fb1.json_for_send)
+        fb.send_feedback(cls.fb2.json_for_send)
+        fb.send_feedback(cls.fb3.json_for_send)
+        fb.send_feedback(cls.fb4.json_for_send)
+        fb.send_feedback(cls.fb5.json_for_send)
+        fb.send_feedback(cls.fb6.json_for_send)
         requests.session().close()
         cls.driver = webdriver.Chrome(ChromeDriverManager().install())
         #cls.driver = webdriver.Chrome(DRIVER_PATH)
@@ -87,22 +87,17 @@ class FeedbackPermissionToRead(BaseTest):
         assert fb is not None
 
     def test_user_can_see_feedback_to_his_team(self):
-        browser.open_url(FEEDBACK_ALL_URL)
-        fb = FeedbackPage().get_feedback_by_text(self.fb5.text)
+        fb = FeedbackPage().open_all().get_feedback_by_text(self.fb5.text)
         assert fb is not None
-        browser.open_url(FEEDBACK_TO_YOU_URL)
-        fb = FeedbackPage().get_feedback_by_text(self.fb5.text)
+        fb = FeedbackPage().open_to_you().get_feedback_by_text(self.fb5.text)
         assert fb is not None
 
     def test_user_cant_see_feedback_to_team_if_he_not_member(self):
-        browser.open_url(FEEDBACK_ALL_URL)
-        fb = FeedbackPage().get_feedback_by_text(self.fb6.text)
+        fb = FeedbackPage().open_all().get_feedback_by_text(self.fb6.text)
         assert fb is None
-        browser.open_url(FEEDBACK_TO_YOU_URL)
-        fb = FeedbackPage().get_feedback_by_text(self.fb6.text)
+        fb = FeedbackPage().open_to_you().get_feedback_by_text(self.fb6.text)
         assert fb is None
-        browser.open_url(FEEDBACK_ADDED_TO_PRAISE_URL)
-        fb = FeedbackPage().get_feedback_by_text(self.fb6.text)
+        fb = FeedbackPage().open_added_to_praise().get_feedback_by_text(self.fb6.text)
         assert fb is None
 
     def setUp(self):

@@ -1,3 +1,5 @@
+import time
+
 from selene.api import *
 from src.locators import *
 from src.pages_url import *
@@ -55,6 +57,7 @@ class FeedbackPage(object):
 
     def open_all(self):
         browser.open_url(FEEDBACK_ALL_URL)
+        time.sleep(0.1)
         return FeedbackPage()
 
     def open_sent(self):

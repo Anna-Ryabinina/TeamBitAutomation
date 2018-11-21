@@ -17,7 +17,7 @@ class OnboardingPopup(object):
         self.invite_link = s(by.xpath(ONBOARDING_INVITE_LINK))
         self.survey_list = s(ONBOARDING_SURVEY_LIST)
         self.survey_blocks = ss(by.xpath(ONBOARDING_SURVEY_BLOCK))
-        self.finish_button = s(ONBOARDING_FINISH_BUTTON)
+        self.finish_button = s(by.xpath(ONBOARDING_FINISH_BUTTON))
         self.send_invite_button = s(by.xpath(ONBOARDING_SEND_BUTTON))
 
     def get_survey_block_by_text(self, text):

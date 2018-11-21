@@ -15,24 +15,23 @@ import requests
 
 class SurveyTest(BaseTest):
 
-    def test_something(self):
+    def test_user_can_create_text_survey(self):
         user1 = User(user_1)
-        title = 'test ' + self.execute_date
-        question = 'test q ' + self.execute_date
-        LoginPage().open().login(user1.email, user1.password)
+        title = 'test_user_can_create_survey ' + self.execute_date
+        question_text = 'text_public' + self.execute_date
+        LoginPage().open().login_as_user(user1)
         time.sleep(0.5)
         SurveyPage().open().create_new_survey_button.click()
-        SurveyPopup().popup.should(be.visible)
-        SurveyPopup().create_empty().type_name(title)
-        q = SurveyPopup().get_question_by_id()
-        q.type_question(question).choose_rating_option().choose_anonymous_option()
+        SurveyPopup().create_empty().type_name(title).get_question_by_id().type_question(question_text)
         SurveyPopup().run_now()
-        browser.driver().refresh()
+        time.sleep(0.5)
         survey = SurveyPage().get_survey_by_text(title)
         assert survey is not None
-        RequestsPage().open()
-        r = RequestsPage().get_request_by_text(question)
-        assert r is not None
+        sess = requests.session()
+        ApiMethods(sess).login_as_user(user1)
+        survey = ApiMethods(sess).get_survey_by_title(title)
+        assert survey is not None
+
 
     def test_api(self):
         user1 = User(user_1)
@@ -43,7 +42,8 @@ class SurveyTest(BaseTest):
         print('Title: ' + name)
         sess = requests.session()
         ApiMethods(sess).login_as_user(user1)
-        request_data = (SurveyPayload()
+        payload = SurveyPayload()
+        request_data = (payload
                         .set_title(name)
                         .add_text_question('1 text public question')
                         .add_text_question('2 text anonymous question', is_anonymous=True)
@@ -52,6 +52,10 @@ class SurveyTest(BaseTest):
                         .set_receivers([user1, user2, user3])
                         .set_viewers([user1, user2, user4])
                         .generate_new_survey_data_run_now())
+        print(payload.title)
+        print(payload.questions)
+        print(payload.viewers)
+        print(payload.receivers)
         print(request_data)
         r = ApiMethods(sess).create_survey(request_data)
         print(r.status_code)

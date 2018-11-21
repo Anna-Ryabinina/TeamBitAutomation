@@ -76,11 +76,11 @@ class FeedbackTests(BaseTest):
     def test_user_can_add_sent_feedback_to_praise(self):
         user1 = User(user_1)
         user2 = User(user_2)
-        payload = FeedbackPayload([user2], text_prefix=self.execute_date).generate_feedback_data()
+        payload = FeedbackPayload().generate_feedback_to_send([user2], self.execute_date)
         sess = requests.session()
 
         ApiMethods(sess).login_as_user(user1)
-        ApiMethods(sess).send_feedback(payload.json)
+        ApiMethods(sess).send_feedback(payload.json_for_send)
         sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
@@ -102,11 +102,11 @@ class FeedbackTests(BaseTest):
     def test_user_can_add_recieved_feedback_to_praise(self):
         user1 = User(user_1)
         user2 = User(user_2)
-        payload = FeedbackPayload([user1], text_prefix=self.execute_date).generate_feedback_data()
+        payload = FeedbackPayload().generate_feedback_to_send([user1], self.execute_date)
         sess = requests.session()
 
         ApiMethods(sess).login_as_user(user2)
-        ApiMethods(sess).send_feedback(payload.json)
+        ApiMethods(sess).send_feedback(payload.json_for_send)
         sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
@@ -125,11 +125,11 @@ class FeedbackTests(BaseTest):
     def test_user_can_mark_sent_feedback_with_flag(self):
         user1 = User(user_1)
         user3 = User(user_3)
-        payload = FeedbackPayload([user3], text_prefix=self.execute_date, shared=True).generate_feedback_data()
+        payload = FeedbackPayload().generate_feedback_to_send([user3], self.execute_date, is_shared=True)
         sess = requests.session()
 
         ApiMethods(sess).login_as_user(user1)
-        ApiMethods(sess).send_feedback(payload.json)
+        ApiMethods(sess).send_feedback(payload.json_for_send)
         sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
@@ -148,11 +148,11 @@ class FeedbackTests(BaseTest):
     def test_user_can_mark_recieved_feedback_with_flag(self):
         user1 = User(user_1)
         user3 = User(user_3)
-        payload = FeedbackPayload([user1], text_prefix =self.execute_date, shared=True).generate_feedback_data()
+        payload = FeedbackPayload().generate_feedback_to_send([user1], self.execute_date, is_shared=True)
         sess = requests.session()
 
         ApiMethods(sess).login_as_user(user3)
-        ApiMethods(sess).send_feedback(payload.json)
+        ApiMethods(sess).send_feedback(payload.json_for_send)
         sess.close()
 
         LoginPage().open().login(user1.email, user1.password)

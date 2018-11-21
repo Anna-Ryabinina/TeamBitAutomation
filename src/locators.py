@@ -27,7 +27,7 @@ ONBOARDING_SMILE = '//*[@id="modal"]/div/div/div[1]/div[1]/a'
 ONBOARDING_NEXT_BUTTON = '#continue_onboarding'
 ONBOARDING_GUEST_EMAIL = '//*[@id="modal"]/div/div[1]/div[1]/table/tbody/tr/td[1]/fieldset/input'
 ONBOARDING_ADD_ANOTHER_GUEST = '//*[@id="modal"]/div/div[1]/div[2]/div[1]/button'
-ONBOARDING_FINISH_BUTTON = '.finish_onboarding'
+ONBOARDING_FINISH_BUTTON = '//*[@id="finish_onboarding"]'
 ONBOARDING_SEND_BUTTON = '//*[@id="modal"]/div/div/div[1]/footer/div[2]/button'
 ONBOARDING_INVITE_LINK = '//*[@id="modal"]/div/div[1]/div[2]/div[2]/div[1]/fieldset/input'
 ONBOARDING_SURVEY_LIST = '.setup-surveys-modal-list'
@@ -79,7 +79,7 @@ FEEDBACK_POPUP_MAKE_PUBLIC_ICON = '//*[@id="modal"]/div/div/footer/div/div[2]/i'
 
         # FeedbackBlock
 FEEDBACK_BLOCK_VALUE_ICON = ".//*[@class='emojione']"
-FEEDBACK_BLOCK_FEEDBACK_TEXT = './div[2]/div/div[1]/pre/span'
+FEEDBACK_BLOCK_FEEDBACK_TEXT = './/*[@class="text"]'
 FEEDBACK_BLOCK_ADD_TO_PRAISE_LINK = './/*[@data-role="praise-feedback"]'
 FEEDBACK_BLOCK_PEOPLE_NAME = '.one-feedback-people'
 FEEDBACK_BLOCK_FLAGGED_LINK = './/*[@data-role="flag-feedback"]'
