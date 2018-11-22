@@ -67,7 +67,6 @@ class FeedbackPage(object):
 
     def open_all(self):
         browser.open_url(FEEDBACK_ALL_URL)
-        time.sleep(0.1)
         return FeedbackPage()
 
     def open_sent(self):

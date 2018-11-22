@@ -13,6 +13,7 @@ from src.test_data_generators.SurveyPayload import SurveyPayload
 import requests
 from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
+from src.pageobjects.pages.SurveyDetailsPage import SurveyDetailsPage
 
 
 class SurveyTest(BaseTest):
@@ -103,6 +104,55 @@ class SurveyTest(BaseTest):
         assert f is not None
         f = FeedbackPage().get_survey_answer_by_text(question_rating_anonym)
         assert f is not None
+
+    def test_user_can_pause_survey(self):
+        user = User(user_1)
+        title = 'test_deactivate ' + self.execute_date
+        payload = SurveyPayload(title)
+        survey = payload.add_text_question('question_1').add_text_question('question_2').generate_new_survey_data_run_now()
+        sess = requests.session()
+        ApiMethods(sess).login_as_user(user)
+        response = ApiMethods(sess).create_survey(survey)
+        print(response.json()['id'])
+
+        LoginPage().open().login_as_user(user)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().open_by_id(response.json()['id'])
+        time.sleep(0.5)
+
+        SurveyDetailsPage().pause_survey()
+        SurveyDetailsPage().pause_button.should(have.text('live'))
+
+        survey = ApiMethods(sess).get_survey_by_id(response.json()['id'])
+        assert survey.is_active is True
+
+        SurveyPage().open().get_survey_by_text(title).paused_label.should(be.visible)
+
+    def test_user_can_deactivate_survey(self):
+        user = User(user_1)
+        title = 'test_activate ' + self.execute_date
+        payload = SurveyPayload(title)
+        survey = payload.add_text_question('question_1').add_text_question(
+            'question_2').generate_new_survey_data_run_now()
+        sess = requests.session()
+        ApiMethods(sess).login_as_user(user)
+        id = ApiMethods(sess).create_survey(survey).json()['id']
+        ApiMethods(sess).deactivate_survey(id)
+
+        LoginPage().open().login_as_user(user)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().open_by_id(id)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().set_survey_live()
+        SurveyDetailsPage().pause_button.should(have.text('Pause'))
+
+        survey = ApiMethods(sess).get_survey_by_id(id)
+        assert survey.is_active is False
+
+        SurveyPage().open().get_survey_by_text(title).paused_label.should_not(be.visible)
 
 
 if __name__ == '__main__':

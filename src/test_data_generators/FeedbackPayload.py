@@ -51,7 +51,7 @@ class FeedbackPayload(object):
         }
         return self
 
-    def get_feedback_from_json(self, json):
+    def generate_feedback_from_json(self, json):
         self.value = json['value']
         self.is_shared = json['is_shared']
         self.date = json['date']

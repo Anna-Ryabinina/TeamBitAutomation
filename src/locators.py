@@ -130,6 +130,7 @@ SURVEY_INFO_PAUSE_BUTTON     = '//*[@id="app"]/div/div[1]/div[1]/header/div[3]/b
 SURVEY_INFO_BACK_BUTTON     = '//*[@id="app"]/div/div[1]/div[1]/a'
 SURVEY_INFO_EDIT_BUTTON     = '//*[@id="app"]/div/div[1]/div[1]/header/div[2]/button'
 SURVEY_POPUP     = '//*[@id="modal01"]'
+SURVEY_INFO_FILTER = ''
 
         # SurveyPopup
 SURVEY_POPUP_CLOSE_BUTTON     = '//*[@id="modal"]/div/header/button'

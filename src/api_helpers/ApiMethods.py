@@ -48,7 +48,17 @@ class ApiMethods(object):
         feedbacks = self.get_all_feedback().json()
         for feedback in feedbacks:
             if text in feedback['text']:
-                s = FeedbackPayload().generate_from_json(feedback)
+                s = FeedbackPayload().generate_feedback_from_json(feedback)
                 return s
         return None
+
+    def get_survey_by_id(self, id):
+        r = self.session.get(GET_SURVEYS_URL + '/' + str(id))
+        return SurveyPayload().generate_from_json(r.json)
+
+    def deactivate_survey(self, id):
+        return self.session.put(GET_SURVEYS_URL + '/' + str(id) + '/deactivate')
+
+    def activate_survey(self, id):
+        return self.session.put(GET_SURVEYS_URL + '/' + str(id) + '/activate')
 

@@ -1,6 +1,7 @@
 from selene.api import *
 from src.locators import *
 from src.pages_url import *
+import time
 
 
 class SurveyPage(object):
@@ -13,6 +14,7 @@ class SurveyPage(object):
 
     def open(self):
         browser.open_url(SURVEY_PAGE_URL)
+        time.sleep(0.5)
         return SurveyPage()
 
     def get_survey_by_text(self, text):
@@ -24,18 +26,6 @@ class SurveyPage(object):
                 if text in srv.element(SURVEY_BLOCK_TITLE).text:
                     return SurveyBlock(srv)
             return None
-
-    def click_back(self):
-        self.back_button.click()
-        return SurveyPage()
-
-    def pause_survey(self):
-        self.pause_button.click()
-        return SurveyPage()
-
-    def set_survey_live(self):
-        self.pause_button.click()
-        return SurveyPage()
 
 
 class SurveyBlock(object):

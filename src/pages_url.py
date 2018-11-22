@@ -13,6 +13,7 @@ REQUEST_PAGE_URL = HOST_NAME + "/requests"
 REQUEST_SENT_URL = HOST_NAME + "/requests/sent"
 REQUEST_RESOLVED_URL = HOST_NAME + "/requests/resolved"
 SURVEY_PAGE_URL = HOST_NAME + "/surveys"
+SURVEY_DETAILS_URL = HOST_NAME + '/survey/'
 PEOPLE_PAGE_URL = HOST_NAME + "/people"
 TEAMMATE_PAGE_URL = HOST_NAME + "/users/"
 TEAMS_PAGE_URL = HOST_NAME + "/teams/"
