@@ -16,6 +16,7 @@ class SurveyPopup(object):
         self.who_able_to_see_input = s(by.xpath(SURVEY_POPUP_WHO_ABLE_TO_SEE_INPUT))
         self.add_question_button = s(by.xpath(SURVEY_POPUP_ADD_QUESTION_BUTTON))
         self.questions = ss(by.xpath(SURVEY_POPUP_QUESTION_SECTION))
+        self.update_button = s(by.xpath(SURVEY_POPUP_UPDATE_BUTTON))
 
     def close(self):
         self.close_button.click()
@@ -62,6 +63,10 @@ class SurveyPopup(object):
         self.title_input.set(name)
         return SurveyPopup()
 
+    def click_update(self):
+        self.update_button.click()
+        return SurveyPopup()
+
 
 class SurveyQuestionBlock(object):
     def __init__(self, question):
@@ -75,20 +80,27 @@ class SurveyQuestionBlock(object):
 
     def type_question(self, text):
         self.question_input.set(text)
-        return SurveyQuestionBlock(self.question)
+        return self
 
     def choose_text_option(self):
         self.text_option.click()
-        return SurveyQuestionBlock(self.question)
+        return self
 
     def choose_rating_option(self):
         self.rating_option.click()
-        return SurveyQuestionBlock(self.question)
+        return self
 
     def choose_public_option(self):
         self.public_option.click()
-        return SurveyQuestionBlock(self.question)
+        return self
 
     def choose_anonymous_option(self):
         self.anonymous_option.click()
-        return SurveyQuestionBlock(self.question)
+        return self
+
+    def delete_question(self):
+        self.remove_question_button.click()
+        return self
+
+
+

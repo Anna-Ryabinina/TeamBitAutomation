@@ -109,7 +109,7 @@ class SurveyTest(BaseTest):
         user = User(user_1)
         title = 'test_deactivate ' + self.execute_date
         payload = SurveyPayload(title)
-        survey = payload.add_text_question('question_1').add_text_question('question_2').generate_new_survey_data_run_now()
+        survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
         sess = requests.session()
         ApiMethods(sess).login_as_user(user)
         response = ApiMethods(sess).create_survey(survey)
@@ -133,8 +133,7 @@ class SurveyTest(BaseTest):
         user = User(user_1)
         title = 'test_activate ' + self.execute_date
         payload = SurveyPayload(title)
-        survey = payload.add_text_question('question_1').add_text_question(
-            'question_2').generate_new_survey_data_run_now()
+        survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
         sess = requests.session()
         ApiMethods(sess).login_as_user(user)
         id = ApiMethods(sess).create_survey(survey).json()['id']
@@ -153,6 +152,93 @@ class SurveyTest(BaseTest):
         assert survey.is_active is False
 
         SurveyPage().open().get_survey_by_text(title).paused_label.should_not(be.visible)
+
+    def test_user_can_edit_survey_delete_question(self):
+        user = User(user_1)
+        receiver = User(user_2)
+        title = 'test_edit ' + self.execute_date
+        new_title = 'new_title ' + self.execute_date
+        payload = SurveyPayload(title)
+        survey = payload.add_text_question('question_1').add_text_question(
+            'question_2').generate_new_survey_data_run_now()
+        sess = requests.session()
+        ApiMethods(sess).login_as_user(user)
+        id = ApiMethods(sess).create_survey(survey).json()['id']
+
+        LoginPage().open().login_as_user(user)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().open_by_id(id)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().edit_button.click()
+        (SurveyPopup()
+         .type_name(new_title)
+         .get_question_by_id()
+         .type_question('new question_1')
+         .choose_rating_option()
+         .choose_anonymous_option())
+        (SurveyPopup()
+         .get_question_by_id(1)
+         .delete_question())
+        (SurveyPopup()
+         .type_who_request_feedback_from(receiver)
+         .type_who_able_to_see(receiver)
+         .click_update())
+
+        survey = ApiMethods(sess).get_survey_by_id(id)
+
+        assert new_title in survey.title
+        assert receiver.id in survey.receivers
+        assert receiver.id in survey.viewers
+        assert len(survey.questions) == 1
+        assert survey.questions[0]['type'] == 1
+        assert 'new' in survey.questions[0]['text']
+        assert survey.questions[0]['is_anonymous'] == True
+
+    def test_user_can_edit_survey_add_question(self):
+        user = User(user_1)
+        receiver = User(user_2)
+        title = 'test_edit ' + self.execute_date
+        new_title = 'new_title ' + self.execute_date
+        payload = SurveyPayload(title)
+        survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
+        sess = requests.session()
+        ApiMethods(sess).login_as_user(user)
+        id = ApiMethods(sess).create_survey(survey).json()['id']
+
+        LoginPage().open().login_as_user(user)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().open_by_id(id)
+        time.sleep(0.5)
+
+        SurveyDetailsPage().edit_button.click()
+        (SurveyPopup()
+         .type_name(new_title)
+         .get_question_by_id()
+         .type_question('new question_1')
+         .choose_rating_option()
+         .choose_anonymous_option())
+        (SurveyPopup()
+         .add_question()
+         .get_question_by_id(1)
+         .type_question('new question_2'))
+        (SurveyPopup()
+         .type_who_request_feedback_from(receiver)
+         .type_who_able_to_see(receiver)
+         .click_update())
+
+        survey = ApiMethods(sess).get_survey_by_id(id)
+
+        assert new_title in survey.title
+        assert receiver.id in survey.receivers
+        assert receiver.id in survey.viewers
+        assert len(survey.questions) == 2
+        assert survey.questions[0]['type'] == 1
+        assert 'new' in survey.questions[0]['text']
+        assert survey.questions[0]['is_anonymous'] == True
+        assert 'new' in survey.questions[1]['text']
 
 
 if __name__ == '__main__':

@@ -157,6 +157,7 @@ SURVEY_POPUP_CHOOSE_DATE_TIME_BUTTON = ".react-datepicker-wrapper"
 SURVEY_POPUP_RUN_NOW_BUTTON = "//*[@id=\"modal\"]/div/div/div[1]/div[2]/div/span/button"
 SURVEY_POPUP_WHO_REQUEST_FROM_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[6]/div/div/div'
 SURVEY_POPUP_WHO_ABLE_TO_SEE_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[7]/div/div/div/input'
+SURVEY_POPUP_UPDATE_BUTTON = '//*[@id="modal"]/div/div/div[1]/div[2]/div/button'
 
 MAIN_MENU_FEEDBACK = ''
 MAIN_MENU_REQUESTS = ''
