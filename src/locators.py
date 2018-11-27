@@ -155,8 +155,10 @@ SURVEY_POPUP_SETTING_TEAMMATE_TEXT_INPUT     = '//*[@class="teambit-multiselect-
 SURVEY_POPUP_CREATE_BUTTON     = '//*[@id="modal"]/div/div/div[1]/div[2]/div/button'
 SURVEY_POPUP_CHOOSE_DATE_TIME_BUTTON = ".react-datepicker-wrapper"
 SURVEY_POPUP_RUN_NOW_BUTTON = "//*[@id=\"modal\"]/div/div/div[1]/div[2]/div/span/button"
-SURVEY_POPUP_WHO_REQUEST_FROM_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[6]/div/div/div'
-SURVEY_POPUP_WHO_ABLE_TO_SEE_INPUT = '//*[@id="modal"]/div/div/div[1]/div[1]/div[7]/div/div/div/input'
+SURVEY_POPUP_WHO_REQUEST_FROM_INPUT = '//*[@data-role="survey-receivers"]//*[@class="teambit-multiselect-selector-container"]/input'
+SURVEY_POPUP_DELETE_RECEIVER = '//*[@data-role="survey-receivers"]//*[@class="remove"]'
+SURVEY_POPUP_WHO_ABLE_TO_SEE_INPUT = '//*[@data-role="survey-viewers"]//*[@class="teambit-multiselect-selector-container"]/input'
+SURVEY_POPUP_DELETE_VIEWER = '//*[@data-role="survey-viewers"]//*[@class="remove"]'
 SURVEY_POPUP_UPDATE_BUTTON = '//*[@id="modal"]/div/div/div[1]/div[2]/div/button'
 
 MAIN_MENU_FEEDBACK = ''

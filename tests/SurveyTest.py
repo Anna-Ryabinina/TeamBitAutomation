@@ -10,7 +10,6 @@ from src.test_data_generators.User import User
 from src.test_data import *
 from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.SurveyPayload import SurveyPayload
-import requests
 from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from src.pageobjects.pages.SurveyDetailsPage import SurveyDetailsPage
@@ -59,7 +58,7 @@ class SurveyTest(BaseTest):
 
         survey = SurveyPage().get_survey_by_text(title)
         assert survey is not None
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user1)
         survey = ApiMethods(sess).get_survey_by_title(title)
         assert survey is not None
@@ -110,10 +109,9 @@ class SurveyTest(BaseTest):
         title = 'test_deactivate ' + self.execute_date
         payload = SurveyPayload(title)
         survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user)
         response = ApiMethods(sess).create_survey(survey)
-        print(response.json()['id'])
 
         LoginPage().open().login_as_user(user)
         time.sleep(0.5)
@@ -125,16 +123,17 @@ class SurveyTest(BaseTest):
         SurveyDetailsPage().pause_button.should(have.text('live'))
 
         survey = ApiMethods(sess).get_survey_by_id(response.json()['id'])
-        assert survey.is_active is True
+        assert survey.schedule["is_active"] is False
 
         SurveyPage().open().get_survey_by_text(title).paused_label.should(be.visible)
 
     def test_user_can_deactivate_survey(self):
         user = User(user_1)
         title = 'test_activate ' + self.execute_date
+        print(title)
         payload = SurveyPayload(title)
         survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user)
         id = ApiMethods(sess).create_survey(survey).json()['id']
         ApiMethods(sess).deactivate_survey(id)
@@ -147,11 +146,13 @@ class SurveyTest(BaseTest):
 
         SurveyDetailsPage().set_survey_live()
         SurveyDetailsPage().pause_button.should(have.text('Pause'))
-
-        survey = ApiMethods(sess).get_survey_by_id(id)
-        assert survey.is_active is False
+        time.sleep(0.5)
 
         SurveyPage().open().get_survey_by_text(title).paused_label.should_not(be.visible)
+
+        survey = ApiMethods(sess).get_survey_by_id(id)
+        print(survey.schedule['is_active'])
+        assert survey.schedule['is_active'] is True
 
     def test_user_can_edit_survey_delete_question(self):
         user = User(user_1)
@@ -161,7 +162,7 @@ class SurveyTest(BaseTest):
         payload = SurveyPayload(title)
         survey = payload.add_text_question('question_1').add_text_question(
             'question_2').generate_new_survey_data_run_now()
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user)
         id = ApiMethods(sess).create_survey(survey).json()['id']
 
@@ -182,19 +183,23 @@ class SurveyTest(BaseTest):
          .get_question_by_id(1)
          .delete_question())
         (SurveyPopup()
+         .delete_receiver()
+         .delete_viewer()
          .type_who_request_feedback_from(receiver)
          .type_who_able_to_see(receiver)
          .click_update())
 
+        time.sleep(0.5)
+
         survey = ApiMethods(sess).get_survey_by_id(id)
 
         assert new_title in survey.title
-        assert receiver.id in survey.receivers
-        assert receiver.id in survey.viewers
+        assert str(receiver.id) in survey.receivers
+        assert str(receiver.id) in survey.viewers
         assert len(survey.questions) == 1
         assert survey.questions[0]['type'] == 1
         assert 'new' in survey.questions[0]['text']
-        assert survey.questions[0]['is_anonymous'] == True
+        assert survey.questions[0]['isAonymous'] == True
 
     def test_user_can_edit_survey_add_question(self):
         user = User(user_1)
@@ -203,7 +208,7 @@ class SurveyTest(BaseTest):
         new_title = 'new_title ' + self.execute_date
         payload = SurveyPayload(title)
         survey = payload.add_text_question('question_1').generate_new_survey_data_run_now()
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user)
         id = ApiMethods(sess).create_survey(survey).json()['id']
 
@@ -232,8 +237,8 @@ class SurveyTest(BaseTest):
         survey = ApiMethods(sess).get_survey_by_id(id)
 
         assert new_title in survey.title
-        assert receiver.id in survey.receivers
-        assert receiver.id in survey.viewers
+        assert str(receiver.id) in survey.receivers
+        assert str(receiver.id) in survey.viewers
         assert len(survey.questions) == 2
         assert survey.questions[0]['type'] == 1
         assert 'new' in survey.questions[0]['text']

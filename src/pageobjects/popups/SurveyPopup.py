@@ -17,6 +17,8 @@ class SurveyPopup(object):
         self.add_question_button = s(by.xpath(SURVEY_POPUP_ADD_QUESTION_BUTTON))
         self.questions = ss(by.xpath(SURVEY_POPUP_QUESTION_SECTION))
         self.update_button = s(by.xpath(SURVEY_POPUP_UPDATE_BUTTON))
+        self.delete_receiver_button = s(by.xpath(SURVEY_POPUP_DELETE_RECEIVER))
+        self.delete_viewer_button = s(by.xpath(SURVEY_POPUP_DELETE_VIEWER))
 
     def close(self):
         self.close_button.click()
@@ -65,6 +67,14 @@ class SurveyPopup(object):
 
     def click_update(self):
         self.update_button.click()
+        return SurveyPopup()
+
+    def delete_receiver(self):
+        self.delete_receiver_button.click()
+        return SurveyPopup()
+
+    def delete_viewer(self):
+        self.delete_viewer_button.click()
         return SurveyPopup()
 
 

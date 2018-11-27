@@ -1,7 +1,7 @@
 from selene.api import *
 from src.locators import *
 from src.pages_url import *
-
+import time
 
 class SignUpPage(object):
     def __init__(self):
@@ -25,4 +25,5 @@ class SignUpPage(object):
 
     def open(self):
         browser.open_url(SIGNUP_PAGE_URL)
+        time.sleep(0.5)
         return SignUpPage()

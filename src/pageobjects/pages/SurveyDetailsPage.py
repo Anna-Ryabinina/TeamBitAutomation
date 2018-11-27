@@ -1,6 +1,7 @@
 from selene.api import *
 from src.locators import *
 from src.pages_url import *
+import time
 
 
 class SurveyDetailsPage(object):
@@ -13,6 +14,7 @@ class SurveyDetailsPage(object):
 
     def open_by_id(self, id):
         browser.open_url(SURVEY_DETAILS_URL + str(id))
+        time.sleep(0.5)
         return SurveyDetailsPage()
 
     def click_back(self):

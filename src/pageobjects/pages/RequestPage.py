@@ -1,6 +1,7 @@
 from selene.api import *
 from src.locators import *
 from src.pages_url import *
+import time
 
 
 class RequestsPage(object):
@@ -34,14 +35,17 @@ class RequestsPage(object):
 
     def open(self):
         browser.open_url(REQUEST_PAGE_URL)
+        time.sleep(0.5)
         return RequestsPage()
 
     def open_sent(self):
         browser.open_url(REQUEST_SENT_URL)
+        time.sleep(0.5)
         return RequestsPage()
 
     def open_resolved(self):
         browser.open_url(REQUEST_RESOLVED_URL)
+        time.sleep(0.5)
         return RequestsPage()
 
 

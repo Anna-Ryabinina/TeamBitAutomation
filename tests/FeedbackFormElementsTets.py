@@ -21,10 +21,9 @@ class FeedbackFormElementsTests(BaseTest):
     @classmethod
     def setUpClass(cls):
         cls.execute_date = datetime.datetime.today().strftime('%c')
-        print('Test started: ' + cls.execute_date)
-        cls.driver = webdriver.Chrome(ChromeDriverManager().install())
+        #cls.driver = webdriver.Chrome(ChromeDriverManager().install())
         # self.driver = webdriver.Chrome(DRIVER_PATH)
-        browser.set_driver(cls.driver)
+        #browser.set_driver(cls.driver)
         user1 = User(user_1)
         LoginPage().open().login(user1.email, user1.password)
         time.sleep(0.5)
@@ -37,9 +36,10 @@ class FeedbackFormElementsTests(BaseTest):
 
     @classmethod
     def tearDownClass(cls):
-        if cls.driver is not None:
-            cls.driver.close()
-            cls.driver.quit()
+        browser.quit()
+        #if cls.driver is not None:
+        #    cls.driver.close()
+        #    cls.driver.quit()
 
     def test_feedback_form_opens_from_feedback_page(self):
 
@@ -123,6 +123,7 @@ class FeedbackFormElementsTests(BaseTest):
     def test_request_form_opens_from_people_page(self):
         PeoplePage().open().get_teammate_row_by_id().request_feedback_button.click()
         FeedbackRequestPopup().popup.should(be.visible)
+
 
 if __name__ == '__main__':
     unittest.main()

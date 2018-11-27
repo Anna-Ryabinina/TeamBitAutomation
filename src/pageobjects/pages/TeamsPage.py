@@ -1,6 +1,7 @@
 from selene.api import *
 from src.pages_url import *
 from src.locators import *
+import time
 
 
 class TeamsPage(object):
@@ -10,6 +11,7 @@ class TeamsPage(object):
 
     def open(self):
         browser.open_url(TEAMS_PAGE_URL)
+        time.sleep(0.5)
         return TeamsPage()
 
     def get_team_row_by_id(self, id=0):

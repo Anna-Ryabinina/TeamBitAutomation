@@ -67,30 +67,37 @@ class FeedbackPage(object):
 
     def open_all(self):
         browser.open_url(FEEDBACK_ALL_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_sent(self):
         browser.open_url(FEEDBACK_SENT_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_to_you(self):
         browser.open_url(FEEDBACK_TO_YOU_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_added_to_praise(self):
         browser.open_url(FEEDBACK_ADDED_TO_PRAISE_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_via_surveys(self):
         browser.open_url(FEEDBACK_VIA_SURVEYS_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_via_reviews(self):
         browser.open_url(FEEDBACK_VIA_REVIEWS_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
     def open_flagged(self):
         browser.open_url(FEEDBACK_FLAGGED_URL)
+        time.sleep(0.5)
         return FeedbackPage()
 
 

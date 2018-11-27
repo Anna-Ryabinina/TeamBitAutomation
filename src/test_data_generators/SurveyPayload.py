@@ -93,7 +93,6 @@ class SurveyPayload(object):
         self.organisation_id = json['organization_id']
         self.title = json['name']
         self.is_viewed = json['is_viewed']
-        self.is_active = json['schedule']['is_active']
         self.id = json['id']
         self.created_at = json['created_at']
         self.ask_everyone = json['ask_everyone']

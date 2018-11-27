@@ -10,7 +10,6 @@ from tests.SignUpTests import SignUpTests
 from tests.SurveyTest import SurveyTest
 
 
-
 if __name__ == '__main__':
 
     loader = TestLoader()

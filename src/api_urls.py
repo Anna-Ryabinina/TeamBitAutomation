@@ -1,5 +1,6 @@
-HOST_NAME = "https://staging.teambit.io"
+from selene.api import *
 
+HOST_NAME = config.base_url
 SIGNUP_API_URL = ""
 LOGIN_API_URL = HOST_NAME + "/api/users/auth"
 SEND_FEEDBACK_API_URL = HOST_NAME + "/api/feedback"

@@ -77,11 +77,10 @@ class FeedbackTests(BaseTest):
         user1 = User(user_1)
         user2 = User(user_2)
         payload = FeedbackPayload().generate_feedback_to_send([user2], self.execute_date)
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user1)
         ApiMethods(sess).send_feedback(payload.json_for_send)
-        sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
         time.sleep(0.5)
@@ -103,11 +102,10 @@ class FeedbackTests(BaseTest):
         user1 = User(user_1)
         user2 = User(user_2)
         payload = FeedbackPayload().generate_feedback_to_send([user1], self.execute_date)
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user2)
         ApiMethods(sess).send_feedback(payload.json_for_send)
-        sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
         time.sleep(0.5)
@@ -126,11 +124,10 @@ class FeedbackTests(BaseTest):
         user1 = User(user_1)
         user3 = User(user_3)
         payload = FeedbackPayload().generate_feedback_to_send([user3], self.execute_date, is_shared=True)
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user1)
         ApiMethods(sess).send_feedback(payload.json_for_send)
-        sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
         time.sleep(0.5)
@@ -149,11 +146,10 @@ class FeedbackTests(BaseTest):
         user1 = User(user_1)
         user3 = User(user_3)
         payload = FeedbackPayload().generate_feedback_to_send([user1], self.execute_date, is_shared=True)
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user3)
         ApiMethods(sess).send_feedback(payload.json_for_send)
-        sess.close()
 
         LoginPage().open().login(user1.email, user1.password)
         time.sleep(0.5)

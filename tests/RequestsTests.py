@@ -42,14 +42,13 @@ class RequestTests(BaseTest):
         request_text = self.execute_date + 'test_user_receive_request'
         user1 = User(user_1)
         user2 = User(user_2)
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)
          .send_request(request_payload.json))
-        sess.close()
 
         (LoginPage()
          .open()
@@ -67,13 +66,12 @@ class RequestTests(BaseTest):
         user1 = User(user_1)
         user2 = User(user_2)
 
-        sess = requests.session()
+        sess = self.sess
         ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)
          .send_request(request_payload.json))
-        sess.close()
 
         (LoginPage()
          .open()
@@ -89,14 +87,13 @@ class RequestTests(BaseTest):
         user1 = User(user_1)
         user2 = User(user_2)
         request_text = self.execute_date + 'test_user_can_dismiss_request'
-        sess = requests.session()
+        sess = self.sess
 
         ApiMethods(sess).login_as_user(user2)
         request_payload = RequestPayload([user1], text=request_text).generate_request_data()
 
         (ApiMethods(sess)
          .send_request(request_payload.json))
-        sess.close()
 
         (LoginPage()
          .open()

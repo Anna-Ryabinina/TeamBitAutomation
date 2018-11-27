@@ -21,7 +21,6 @@ class FeedbackPermissionToRead(BaseTest):
     @classmethod
     def setUpClass(cls):
         cls.execute_date = datetime.datetime.today().strftime('%c')
-        print('Test started at: ' + cls.execute_date)
         cls.user1 = User(user_1)
         cls.user2 = User(user_2)
         cls.user3 = User(user_3)
@@ -45,18 +44,19 @@ class FeedbackPermissionToRead(BaseTest):
         fb.send_feedback(cls.fb5.json_for_send)
         fb.send_feedback(cls.fb6.json_for_send)
         requests.session().close()
-        cls.driver = webdriver.Chrome(ChromeDriverManager().install())
+        #cls.driver = webdriver.Chrome(ChromeDriverManager().install())
         #cls.driver = webdriver.Chrome(DRIVER_PATH)
-        browser.set_driver(cls.driver)
+        #browser.set_driver(cls.driver)
         (LoginPage()
          .open()
          .login(cls.user1.email, cls.user1.password))
 
     @classmethod
     def tearDownClass(cls):
-        if cls.driver is not None:
-            cls.driver.close()
-            cls.driver.quit()
+        browser.quit()
+        #if cls.driver is not None:
+        #    cls.driver.close()
+        #    cls.driver.quit()
 
     def test_user_can_see_private_feedback_at_all_page(self):
         fb = FeedbackPage().open_all().get_feedback_by_text(self.fb1.text)

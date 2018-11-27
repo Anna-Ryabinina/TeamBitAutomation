@@ -10,6 +10,7 @@ class PeoplePage(object):
 
     def open(self):
         browser.open_url(PEOPLE_PAGE_URL)
+        time.sleep(0.5)
         return PeoplePage()
 
     def click_invite_button(self):
