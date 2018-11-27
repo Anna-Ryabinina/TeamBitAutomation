@@ -1,6 +1,5 @@
 import unittest
 import time
-import requests
 from selene.api import *
 from src.pages_url import *
 from src.test_data import *
@@ -9,7 +8,7 @@ from src.test_data_generators.RequestPayload import RequestPayload
 from src.api_helpers.ApiMethods import ApiMethods
 from src.pageobjects.pages.LogInPage import LoginPage
 from src.pageobjects.pages.RequestPage import RequestsPage
-from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from tests.BaseTest import BaseTest
 
@@ -103,7 +102,7 @@ class RequestTests(BaseTest):
         rq = RequestsPage().open().get_request_by_text(request_text)
         rq.send_feedback_button.click()
 
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
         (FeedbackRequestPopup()
          .type_text(request_text)

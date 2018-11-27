@@ -5,7 +5,7 @@ from src.pages_url import *
 
 from tests.BaseTest import BaseTest
 from src.pageobjects.pages.SignUpPage import SignUpPage
-from src.pageobjects.popups.OnboardingPopup import OnboardingPopup
+from src.pageobjects.components.OnboardingPopup import OnboardingPopup
 
 
 class SignUpTests(BaseTest):
@@ -13,7 +13,7 @@ class SignUpTests(BaseTest):
     def test_sign_up_with_email(self):
         test_email = 'autotest' + str(time.time()) + '@test.com'
         SignUpPage().open().signup(test_email)
-        OnboardingPopup().popup.should(be.existing).should(be.visible)
+        OnboardingPopup().onboarding_popup.should(be.existing).should(be.visible)
 
     def test_sign_up_empty_email(self):
         SignUpPage().open().signup('').email_error_message.should(be.visible)

@@ -1,5 +1,6 @@
 from selene.api import *
 from src.locators import *
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 
 
 class TeammatesSidebarBlock(object):
@@ -19,13 +20,17 @@ class TeammatesSidebarBlock(object):
     def send_feedback_to_user(self, user):
         t = self.get_teammate_by_name(user)
         t.element(SIDEBAR_TEAMMATE_FEEDBACK_BUTTON).click()
+        return FeedbackRequestPopup()
 
     def request_feedback_from_user(self, user):
         t = self.get_teammate_by_name(user)
         t.element(SIDEBAR_TEAMMATE_REQUEST_BUTTON).click()
+        return FeedbackRequestPopup()
 
     def send_feedback_by_id(self, id=0):
         self.get_teammate_by_id(id).element(SIDEBAR_TEAMMATE_FEEDBACK_BUTTON).click()
+        return FeedbackRequestPopup()
 
     def request_feedback_by_id(self, id=0):
         self.get_teammate_by_id(id).element(SIDEBAR_TEAMMATE_REQUEST_BUTTON).click()
+        return FeedbackRequestPopup()

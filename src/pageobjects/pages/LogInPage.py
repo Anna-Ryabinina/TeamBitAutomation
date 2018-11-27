@@ -2,6 +2,7 @@ from src.locators import *
 from selene.api import *
 from src.pages_url import *
 import time
+from src.pageobjects.pages.SignUpPage import SignUpPage
 
 
 class LoginPage(object):
@@ -21,17 +22,21 @@ class LoginPage(object):
         self.email_input.set(email)
         self.password_input.set(password)
         self.login_button.click()
-        return LoginPage()
+        return self
 
     def login_as_user(self, user):
         self.email_input.set(user.email)
         self.password_input.set(user.password)
         self.login_button.click()
-        return LoginPage()
+        return self
 
     def open(self):
         browser.open_url(LOGIN_PAGE_URL)
         time.sleep(0.5)
-        return LoginPage()
+        return self
+
+    def click_signup_for_free(self):
+        self.signup_for_free_link.click()
+        return SignUpPage()
 
 

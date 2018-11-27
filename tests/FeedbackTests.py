@@ -1,6 +1,4 @@
 import unittest
-import requests
-import time
 
 from src.test_data import *
 from src.api_helpers.ApiMethods import ApiMethods
@@ -9,7 +7,7 @@ from src.test_data_generators.Team import Team
 from src.test_data_generators.FeedbackPayload import FeedbackPayload
 from src.pageobjects.pages.FeedbackPage import *
 from src.pageobjects.pages.LogInPage import LoginPage
-from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 
 from tests.BaseTest import BaseTest
 

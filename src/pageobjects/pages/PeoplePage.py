@@ -1,6 +1,8 @@
 from selene.api import *
 from src.locators import *
+from src.pageobjects.components.TeammateTableRow import TeammateTableRow
 from src.pages_url import *
+import time
 
 
 class PeoplePage(object):
@@ -21,7 +23,7 @@ class PeoplePage(object):
         people = ss(PEOPLE_TEAMMATE_ROW)
         if len(people) == 0:
             return None
-        return TeammateRow(people[id])
+        return TeammateTableRow(people[id])
 
     def get_teammate_row_by_user(self, user):
         people = ss(PEOPLE_TEAMMATE_ROW)
@@ -29,7 +31,7 @@ class PeoplePage(object):
             return None
         for man in people:
             if user.full_name in man.element(PEOPLE_TEAMMATE_NAME_LINK).text:
-                return TeammateRow(man)
+                return TeammateTableRow(man)
         return None
 
     def make_admin_by_id(self, id=0):
@@ -49,21 +51,5 @@ class PeoplePage(object):
         return teammate.make_admin()
 
 
-class TeammateRow(object):
 
-    def __init__(self, row):
-        self.name_link = row.element(PEOPLE_TEAMMATE_NAME_LINK)
-        self.send_feedback_button = row.element(by.xpath(PEOPLE_TEAMMATE_SEND_FEEDBACK_BUTTON))
-        self.request_feedback_button = row.element(by.xpath(PEOPLE_TEAMMATE_REQUEST_FEEDBACK_BUTTON))
-        self.make_admin_button = row.element(by.xpath(PEOPLE_TEAMMATE_MAKE_ADMIN_BUTTON))
-        self.make_user_button = row.element(by.xpath(PEOPLE_TEAMMATE_MAKE_USER_BUTTON))
-        self.delete_button = row.element(by.xpath(PEOPLE_TEAMMATE_DELETE_USER))
-        self.row = row
 
-    def make_admin(self):
-        self.make_admin_button.click()
-        return TeammateRow(self.row)
-
-    def make_user(self):
-        self.make_user_button.click()
-        return TeammateRow(self.row)

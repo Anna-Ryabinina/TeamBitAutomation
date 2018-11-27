@@ -27,7 +27,7 @@ class EditProfilePopup(object):
         self.facebook_input = s(by.xpath(EDIT_PROFILE_FACEBOOK_INPUT))
         self.linkedin_input = s(by.xpath(EDIT_PROFILE_LINKEDIN_INPUT))
         self.instagram_input = s(by.xpath(EDIT_PROFILE_INSTAGRAM_INPUT))
-        self.popup = s(by.xpath(EDIT_PROFILE_POPUP))
+        self.edit_profile_popup = s(by.xpath(EDIT_PROFILE_POPUP))
 
     def fill_all_inputs_and_save(self):
         keyboard = Controller()

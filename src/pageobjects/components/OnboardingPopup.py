@@ -4,7 +4,7 @@ from src.locators import *
 
 class OnboardingPopup(object):
     def __init__(self):
-        self.popup = s(ONBOARDING_POPUP)
+        self.onboarding_popup = s(ONBOARDING_POPUP)
         self.first_name_input = s(by.xpath(ONBOARDING_FIRST_NAME_TEXT_INPUT))
         self.last_name_input = s(by.xpath(ONBOARDING_LAST_NAME_TEXT_INPUT))
         self.job_input = s(by.xpath(ONBOARDING_JOB_TEXT_INPUT))

@@ -2,7 +2,10 @@ import time
 
 from selene.api import *
 from src.locators import *
+from src.pageobjects.components.AnswerToSurveyBlock import AnswerToSurveyBlock
+from src.pageobjects.components.FeedbackBlock import FeedbackBlock
 from src.pages_url import *
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 
 
 class FeedbackPage(object):
@@ -34,93 +37,78 @@ class FeedbackPage(object):
         else:
             for fb in fbs:
                 if text in fb.element(by.xpath(SURVEY_ANSWER_BLOCK_QUESTION_TEXT)).text:
-                    return SurveyAnswerBlock(fb)
+                    return AnswerToSurveyBlock(fb)
             return None
+
+    def click_send_feedback(self):
+        self.send_feedback_button.click()
+        return FeedbackRequestPopup()
 
     def click_menu_all_link(self):
         self.menu_all_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_to_you_link(self):
         self.menu_to_you_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_added_to_praise_link(self):
         self.menu_added_to_praise_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_via_surveys_link(self):
         self.menu_via_surveys_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_via_reviews_link(self):
         self.menu_via_reviews_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_sent_link(self):
         self.menu_sent_feedback_link.click()
-        return FeedbackPage()
+        return self
 
     def click_menu_flagged_link(self):
         self.menu_flagged_link.click()
-        return FeedbackPage()
+        return self
 
     def open_all(self):
         browser.open_url(FEEDBACK_ALL_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_sent(self):
         browser.open_url(FEEDBACK_SENT_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_to_you(self):
         browser.open_url(FEEDBACK_TO_YOU_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_added_to_praise(self):
         browser.open_url(FEEDBACK_ADDED_TO_PRAISE_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_via_surveys(self):
         browser.open_url(FEEDBACK_VIA_SURVEYS_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_via_reviews(self):
         browser.open_url(FEEDBACK_VIA_REVIEWS_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
     def open_flagged(self):
         browser.open_url(FEEDBACK_FLAGGED_URL)
         time.sleep(0.5)
-        return FeedbackPage()
+        return self
 
 
-class FeedbackBlock(object):
-    def __init__(self, fb):
-        self.text = fb.element(by.xpath(FEEDBACK_BLOCK_FEEDBACK_TEXT)).text
-        self.value = fb.element(by.xpath(FEEDBACK_BLOCK_VALUE_ICON))
-        self.people = fb.element(FEEDBACK_BLOCK_PEOPLE_NAME)
-        self.to_praise_link = fb.element(by.xpath(FEEDBACK_BLOCK_ADD_TO_PRAISE_LINK))
-        self.flag_link = fb.element(by.xpath(FEEDBACK_BLOCK_FLAGGED_LINK))
-        self.heart_icon = fb.element(by.xpath(FEEDBACK_BLOCK_LIKE_ICON))
-        self.comment_icon = fb.element(by.xpath(FEEDBACK_BLOCK_COMMENT_ICON))
-        self.more = fb.element(FEEDBACK_BLOCK_MORE_LINK)
-        self.edit = fb.element(FEEDBACK_BLOCK_EDIT_LINK)
-        self.delete = fb.element(FEEDBACK_BLOCK_DELETE_LINK)
 
 
-class SurveyAnswerBlock(object):
-    def __init__(self, fb):
-        self.sender = fb.element(SURVEY_ANSWER_BLOCK_SENDER)
-        self.question_text = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_QUESTION_TEXT))
-        self.people = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_PEOPLE))
-        self.answer_text = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_ANSWER_TEXT))
-        self.add_to_praise_link = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_ADD_TO_PRAISE_LINK))
-        self.flag_link = fb.element(by.xpath(SURVEY_ANSWER_BLOCK_FLAG_LINK))
+
 

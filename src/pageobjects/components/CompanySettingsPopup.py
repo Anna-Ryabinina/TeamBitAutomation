@@ -1,12 +1,11 @@
 from selene.api import *
 from src.locators import *
-from src.pages_url import *
 
 
 class CompanySettingsPopup(object):
 
     def __init__(self):
-        self.popup = s(by.xpath(COMPANY_SETTINGS_POPUP))
+        self.company_settings_popup = s(by.xpath(COMPANY_SETTINGS_POPUP))
         self.close_button = s(by.xpath(COMPANY_SETTINGS_CLOSE_BUTTON))
         self.cancel_button = s(by.xpath(COMPANY_SETTINGS_CANCEL_BUTTON))
         self.save_button = s(by.xpath(COMPANY_SETTINGS_SAVE_BUTTON))

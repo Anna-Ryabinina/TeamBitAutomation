@@ -1,5 +1,7 @@
 from selene.api import *
 from src.locators import *
+from src.pageobjects.components.RequestBlock import RequestBlock
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pages_url import *
 import time
 
@@ -23,34 +25,33 @@ class RequestsPage(object):
 
     def click_menu_pending_link(self):
         self.menu_pending_link.click()
-        return RequestsPage()
+        return self
 
     def click_menu_sent_link(self):
         self.menu_sent_link.click()
-        return RequestsPage()
+        return self
 
     def click_menu_resolved_link(self):
         self.menu_resolved_link.click()
-        return RequestsPage()
+        return self
 
     def open(self):
         browser.open_url(REQUEST_PAGE_URL)
         time.sleep(0.5)
-        return RequestsPage()
+        return self
 
     def open_sent(self):
         browser.open_url(REQUEST_SENT_URL)
         time.sleep(0.5)
-        return RequestsPage()
+        return self
 
     def open_resolved(self):
         browser.open_url(REQUEST_RESOLVED_URL)
         time.sleep(0.5)
-        return RequestsPage()
+        return self
+
+    def click_request_feedback(self):
+        self.request_feedback_button.click()
+        return FeedbackRequestPopup()
 
 
-class RequestBlock(object):
-    def __init__(self, rq):
-        self.text = rq.element(by.xpath(REQUEST_BLOCK_TEXT)).text
-        self.send_feedback_button = rq.element(by.xpath(REQUEST_BLOCK_SEND_FEEDBACK_BUTTON))
-        self.dismiss_link = rq.element(by.xpath(REQUEST_BLOCK_DISMISS_LINK))

@@ -2,7 +2,7 @@ import unittest
 import time
 from src.pageobjects.pages.SignUpPage import SignUpPage
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
-from src.pageobjects.popups.OnboardingPopup import *
+from src.pageobjects.components.OnboardingPopup import *
 from tests.BaseTest import BaseTest
 
 
@@ -15,7 +15,7 @@ class OnboardingTests(BaseTest):
         SignUpPage().open().signup(test_email)
 
         (OnboardingPopup()
-         .popup.should(be.visible))
+         .onboarding_popup.should(be.visible))
 
         (OnboardingPopup()
          .fill_account_info()

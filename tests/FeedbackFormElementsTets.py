@@ -1,17 +1,15 @@
 import datetime
 import unittest
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from src.pageobjects.pages.TeammatePage import TeammatePage
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from src.pageobjects.pages.TeamsPage import TeamsPage
-from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pageobjects.pages.LogInPage import LoginPage
 from src.test_data_generators.User import User
 from tests.BaseTest import BaseTest
 from selene.api import *
 from src.test_data import *
-from src.pageobjects.blocks.TeammatesSidebarBlock import TeammatesSidebarBlock
+from src.pageobjects.components.TeammatesSidebarBlock import TeammatesSidebarBlock
 from src.pageobjects.pages.RequestPage import RequestsPage
 from src.pageobjects.pages.PeoplePage import PeoplePage
 import time
@@ -47,10 +45,8 @@ class FeedbackFormElementsTests(BaseTest):
 
 
         (FeedbackPage()
-         .send_feedback_button.click())
-
-        (FeedbackRequestPopup()
-         .popup.should(be.visible))
+         .click_send_feedback()
+         .feedback_request_popup.should(be.visible))
 
         (FeedbackRequestPopup()
          .send_feedback_button.should_not(be.enabled))
@@ -83,46 +79,42 @@ class FeedbackFormElementsTests(BaseTest):
 
         (FeedbackRequestPopup()
          .close()
-         .popup.should_not(be.visible))
+         .feedback_request_popup.should_not(be.visible))
 
 
     def test_feedback_form_opens_from_sidebar(self):
-        TeammatesSidebarBlock().send_feedback_by_id()
-        FeedbackRequestPopup().popup.should(be.visible)
+        TeammatesSidebarBlock().send_feedback_by_id().feedback_request_popup.should(be.visible)
 
     def test_feedback_form_opens_from_teammate_page(self):
         TeammatePage().open_by_user_id(User(user_2).id)
-        TeammatePage().click_send_feedback_button()
-        FeedbackRequestPopup().popup.should(be.visible)
+        TeammatePage().click_send_feedback_button().feedback_request_popup.should(be.visible)
 
     def test_feedback_form_opens_from_team_page(self):
         TeamsPage().open().get_team_row_by_id().send_feedback_button.click()
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
     def test_request_form_opens_from_request_page(self):
-        RequestsPage().open().request_feedback_button.click()
-        FeedbackRequestPopup().popup.should(be.visible)
+        RequestsPage().open().click_request_feedback().feedback_request_popup.should(be.visible)
 
     def test_request_form_opens_from_sidebar(self):
         FeedbackPage().open_all()
-        TeammatesSidebarBlock().request_feedback_by_id()
-        FeedbackRequestPopup().popup.should(be.visible)
+        TeammatesSidebarBlock().request_feedback_by_id().feedback_request_popup.should(be.visible)
 
     def test_request_form_opens_from_teammate_page(self):
         TeammatePage().open_by_user_id(User(user_2).id).click_request_feedback_button()
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
-    def test_request_form_openst_from_team_page(self):
+    def test_request_form_opens_from_team_page(self):
         TeamsPage().open().get_team_row_by_id().send_feedback_button.click()
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
     def test_feedback_form_opens_from_people_page(self):
         PeoplePage().open().get_teammate_row_by_id().send_feedback_button.click()
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
     def test_request_form_opens_from_people_page(self):
         PeoplePage().open().get_teammate_row_by_id().request_feedback_button.click()
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
 
 if __name__ == '__main__':

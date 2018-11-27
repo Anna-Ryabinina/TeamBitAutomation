@@ -3,14 +3,14 @@ import time
 from selene.api import *
 from tests.BaseTest import BaseTest
 from src.pageobjects.pages.SurveyPage import SurveyPage
-from src.pageobjects.popups.SurveyPopup import SurveyPopup
+from src.pageobjects.components.SurveyPopup import SurveyPopup
 from src.pageobjects.pages.LogInPage import LoginPage
 from src.pageobjects.pages.RequestPage import RequestsPage
 from src.test_data_generators.User import User
 from src.test_data import *
 from src.api_helpers.ApiMethods import ApiMethods
 from src.test_data_generators.SurveyPayload import SurveyPayload
-from src.pageobjects.popups.FeedbackRequestPopup import FeedbackRequestPopup
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pageobjects.pages.FeedbackPage import FeedbackPage
 from src.pageobjects.pages.SurveyDetailsPage import SurveyDetailsPage
 
@@ -77,7 +77,7 @@ class SurveyTest(BaseTest):
 
         request.send_feedback_button.click()
 
-        FeedbackRequestPopup().popup.should(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should(be.visible)
 
         FeedbackRequestPopup().type_text('answer text public')
         time.sleep(0.2)
@@ -91,7 +91,7 @@ class SurveyTest(BaseTest):
         time.sleep(1)
         FeedbackRequestPopup().click_rating_item(1)
         time.sleep(0.2)
-        FeedbackRequestPopup().popup.should_not(be.visible)
+        FeedbackRequestPopup().feedback_request_popup.should_not(be.visible)
 
         FeedbackPage().open_sent()
         time.sleep(0.5)

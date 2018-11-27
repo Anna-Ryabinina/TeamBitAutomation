@@ -7,7 +7,7 @@ from pynput.keyboard import Controller, Key
 
 class FeedbackRequestPopup(object):
     def __init__(self):
-        self.popup = s(by.xpath(FEEDBACK_POPUP))
+        self.feedback_request_popup = s(by.xpath(FEEDBACK_POPUP))
         self.recipient_input = s(FEEDBACK_POPUP_RECIPIENTS_TEXT_INPUT)
         self.text_input = s(by.xpath(FEEDBACK_POPUP_FEEDBACK_TEXT_INPUT))
         self.send_feedback_button = s(by.xpath(FEEDBACK_POPUP_SEND_FEEDBACK_BUTTON))

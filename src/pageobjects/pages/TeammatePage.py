@@ -1,6 +1,7 @@
 from selene.api import *
 
-from src.pageobjects.pages.FeedbackPage import FeedbackBlock
+from src.pageobjects.components.FeedbackBlock import FeedbackBlock
+from src.pageobjects.components.FeedbackRequestPopup import FeedbackRequestPopup
 from src.pages_url import *
 from src.locators import *
 import time
@@ -28,13 +29,14 @@ class TeammatePage(object):
 
     def click_send_feedback_button(self):
         self.send_feedback_button.click()
+        return FeedbackRequestPopup()
 
     def click_request_feedback_button(self):
         self.request_feedback_button.click()
+        return FeedbackRequestPopup()
 
     def open_by_user_id(self, id):
         browser.open_url(TEAMMATE_PAGE_URL + str(id))
         time.sleep(0.5)
-        return TeammatePage()
-
+        return self
 
