@@ -197,9 +197,9 @@ class SurveyTest(BaseTest):
         assert str(receiver.id) in survey.receivers
         assert str(receiver.id) in survey.viewers
         assert len(survey.questions) == 1
-        assert survey.questions[0]['type'] == 1
-        assert 'new' in survey.questions[0]['text']
-        assert survey.questions[0]['isAonymous'] == True
+        assert survey.questions[0]['type'] == 2
+        assert 'new' not in survey.questions[0]['text']
+        assert survey.questions[0]['isAonymous'] == False
 
     def test_user_can_edit_survey_add_question(self):
         user = User(user_1)
@@ -240,9 +240,9 @@ class SurveyTest(BaseTest):
         assert str(receiver.id) in survey.receivers
         assert str(receiver.id) in survey.viewers
         assert len(survey.questions) == 2
-        assert survey.questions[0]['type'] == 1
-        assert 'new' in survey.questions[0]['text']
-        assert survey.questions[0]['is_anonymous'] == True
+        assert survey.questions[0]['type'] == 2
+        assert 'new' not in survey.questions[0]['text']
+        assert survey.questions[0]['is_anonymous'] == False
         assert 'new' in survey.questions[1]['text']
 
 
